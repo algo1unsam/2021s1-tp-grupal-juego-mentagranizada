@@ -3,6 +3,7 @@ import pepita.*
 
 program juego {
 	game.title("Juego Base")
+	game.addVisual(pared)
 	game.addVisual(pepita)
 	game.start()
 }

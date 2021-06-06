@@ -12,3 +12,10 @@ object pepita {
 
 }
 
+
+class Pared {
+	
+	method image() {
+		return "wall_tile.png"
+	}
+}
