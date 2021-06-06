@@ -19,9 +19,9 @@ program guitarraHeroica {
 	config.keyConfig()
 	
 	nota0.bajarNota()
-	nota1.bajarNota()
-	nota2.bajarNota()	
-	nota3.bajarNota()
+	//nota1.bajarNota()
+	//nota2.bajarNota()	
+	//nota3.bajarNota()
 	
 	game.start()
 
