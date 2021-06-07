@@ -5,7 +5,7 @@ import objetos.*
 //Nico voto Kniga
 //LocoLope
 object karoshi {
-	const posicionInicial = game.at(3,3)
+	const posicionInicial = game.at(3,4)
 	var property position = game.center()
 	var property ultimaDireccion = posicionInicial
  	var property haciaDonde = down

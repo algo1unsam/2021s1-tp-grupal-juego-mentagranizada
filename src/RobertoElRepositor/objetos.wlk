@@ -25,3 +25,8 @@ object paredes{
 	
 	
 }
+
+object caja{
+	method image() = "roberto/box_tile.png"
+	method position() = game.at(3,2)
+}
