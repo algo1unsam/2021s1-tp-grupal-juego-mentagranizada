@@ -4,7 +4,7 @@ import config.*
 class Pared {
 	const property position = game.at(0,0)
 	
-	method image() = return "roberto/wall_tile.png"
+	method image() = "roberto/wall_tile.png"
 }
 
 object paredes{
@@ -15,9 +15,10 @@ object paredes{
 	//Este metodo crea cada objeto PARED con su respectiva posicion para luego
 	//poder usar ADDVISUAL y generar las paredes automaticamente con el alto y ancho dado en config.
 	method crearParedes(){
+		//columnas
 		alto.times({i => listaParedes.add(new Pared(position = game.at(0,i-1)))})
 		alto.times({i => listaParedes.add(new Pared(position = game.at(ancho-1,i-1)))})
-		
+		//filas
 		(ancho-2).times({i => listaParedes.add(new Pared(position = game.at(i,0)))})
 		(ancho-2).times({i => listaParedes.add(new Pared(position = game.at(i,alto-1)))})
 	}

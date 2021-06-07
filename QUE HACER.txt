@@ -1,0 +1,18 @@
+D -> "Movimiento hacia la derecha"
+-preguntar si a la derecha hay un objeto con colision y si no lo hay, moverse 1 a la derecha
+-guardar en el atrivuto "estamirandohacia" -> derecha
+
+spaceBar ->
+-preguntar con la direccion de estamirnadohacia (derecha) si hay una CAJA y si a la estamirandohacia(derecha) de la CAJA, hay un espacio vacio.
+-si no lo hay, mover la caja una posicion a la derecha
+-si lo hay, hacer sonido de error. o mensaje puteandote.
+
+
+como ganar: dejar las cajas en sus lugares.
+-preguntando si en el lugar, hay una caja arriba
+-method gane() = listaCajas.all{unaCaja-> unaCaja.position() == lugarDestinado.position()}
+
+
+Si se traba el juego, se puede reiniciar presionando R
+-todos los objetos tienen que tener una posicion y una posicion incial
+-la R, cambia la posicion de todos los objetos a la inicial.

@@ -2,6 +2,7 @@ import wollok.game.*
 import pepita.*
 import objetos.*
 import config.*
+import karoshi.*
 
 program juego {
 	
@@ -13,9 +14,14 @@ program juego {
 	//game.addVisual(box)
 	//game.addVisual(pepita)
 	//game.addVisual(wallTile)
-	paredes.crearParedes()
 	
+	game.addVisual(karoshi)
+	//game.addVisualCharacter(karoshi)
+	
+	paredes.crearParedes()
 	paredes.listaParedes().forEach{unaPared => game.addVisual(unaPared)}
+	
+	game.whenCollideDo(karoshi, {i => game.say(karoshi,"Hola")})
 	
 	game.start()
 }
