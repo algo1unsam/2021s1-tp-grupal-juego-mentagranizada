@@ -15,13 +15,16 @@ program juego {
 	//game.addVisual(pepita)
 	//game.addVisual(wallTile)
 	
-	game.addVisual(karoshi)
+	
 	//game.addVisualCharacter(karoshi)
 	
 	paredes.crearParedes()
 	paredes.listaParedes().forEach{unaPared => game.addVisual(unaPared)}
 	
-	game.whenCollideDo(karoshi, {i => game.say(karoshi,"Hola")})
+	config.configurarTeclas()
+	
+	//game.whenCollideDo(karoshi, {i => game.say(karoshi,"Hola")})
+	game.addVisual(karoshi)
 	
 	game.start()
 }

@@ -10,7 +10,7 @@ class Pared {
 object paredes{
 	const alto = config.alto()
 	const ancho = config.ancho()
-	const property listaParedes = []
+	const property listaParedes = [new Pared(position = game.at(1,2)),new Pared(position = game.at(5,2))]
 	
 	//Este metodo crea cada objeto PARED con su respectiva posicion para luego
 	//poder usar ADDVISUAL y generar las paredes automaticamente con el alto y ancho dado en config.
