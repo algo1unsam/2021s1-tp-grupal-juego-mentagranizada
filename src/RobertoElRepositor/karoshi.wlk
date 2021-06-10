@@ -14,7 +14,8 @@ object karoshi {
 	//method position() = game.center()
 	//method image() = "roberto/spritenpc1.png"
 	
-	method revisar(direccion){
+	method revisar(direccion, haciaDondeMira){
+		haciaDonde = haciaDondeMira
 		if (paredes.listaParedes().any{unaPared=> unaPared.position() == direccion}){
 			game.say(self,"no puedo avanzar, hay una pared")
 		}
@@ -26,19 +27,19 @@ object karoshi {
 	method mover(nuevaDireccion){
 		
 		self.position(nuevaDireccion)
-		if (ultimaDireccion.x()>nuevaDireccion.x()){
-			haciaDonde = left
-		}
-		else if (ultimaDireccion.x()<nuevaDireccion.x()){
-			haciaDonde = right
-		}
-		else if (ultimaDireccion.y()>nuevaDireccion.y()){
-			haciaDonde = down
-		}
-		else if (ultimaDireccion.y()<nuevaDireccion.y()){
-			haciaDonde = up
-		}
-		ultimaDireccion = nuevaDireccion
+//		if (ultimaDireccion.x()>nuevaDireccion.x()){
+//			haciaDonde = left
+//		}
+//		else if (ultimaDireccion.x()<nuevaDireccion.x()){
+//			haciaDonde = right
+//		}
+//		else if (ultimaDireccion.y()>nuevaDireccion.y()){
+//			haciaDonde = down
+//		}
+//		else if (ultimaDireccion.y()<nuevaDireccion.y()){
+//			haciaDonde = up
+//		}
+//		ultimaDireccion = nuevaDireccion
 		
 	}
 }
