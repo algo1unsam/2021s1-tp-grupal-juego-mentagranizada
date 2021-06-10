@@ -16,8 +16,10 @@ object karoshi {
 	
 	method revisar(direccion, haciaDondeMira){
 		haciaDonde = haciaDondeMira
-		if (paredes.listaParedes().any{unaPared=> unaPared.position() == direccion}){
-			game.say(self,"no puedo avanzar, hay una pared")
+		ultimaDireccion = direccion
+		if ((cajas.listaCajas().any{unObjeto=> unObjeto.position() == direccion}) or
+			(paredes.listaParedes().any{unObjeto=> unObjeto.position() == direccion})){
+			game.say(self,"no puedo avanzar, hay un objeto")
 		}
 		else{
 			self.mover(direccion)
@@ -41,6 +43,10 @@ object karoshi {
 //		}
 //		ultimaDireccion = nuevaDireccion
 		
+	}
+	
+	method accion(){
+		if (caja.position()) == ultimaDireccion)
 	}
 }
 

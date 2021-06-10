@@ -26,7 +26,26 @@ object paredes{
 	
 }
 
+object cajas{
+	const property listaCajas = [caja]
+}
 object caja{
 	method image() = "roberto/box_tile.png"
-	method position() = game.at(3,2)
+	method position() = game.at(3,3)
+	
+	
 }
+
+object metas{
+	const property listaMetas = [meta]
+}
+object meta{
+	method image() = "roberto/goal_tile.png"
+	method position() = game.at(1,3)
+}
+
+object oC {
+	const property listaOc=[paredes.listaParedes()]+[cajas.listaCajas()]
+	
+}
+

@@ -20,7 +20,8 @@ program juego {
 	
 	paredes.crearParedes()
 	paredes.listaParedes().forEach{unaPared => game.addVisual(unaPared)}
-	game.addVisual(caja)
+	cajas.listaCajas().forEach{unaCaja => game.addVisual(unaCaja)}
+	metas.listaMetas().forEach{unaMeta => game.addVisual(unaMeta)}
 	
 	config.configurarTeclas()
 	
