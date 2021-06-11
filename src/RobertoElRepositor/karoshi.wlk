@@ -5,21 +5,41 @@ import objetos.*
 //Nico voto Kniga
 //LocoLope
 object karoshi {
-	const posicionInicial = game.at(3,4)
-	var property position = game.center()
+	const posicionInicial = game.at(2,3)
+	var property position = posicionInicial
 	var property ultimaDireccion = posicionInicial
- 	var property haciaDonde = down
-	method image() = "roberto/character_" + haciaDonde + ".png"
-	
-	//method position() = game.center()
-	//method image() = "roberto/spritenpc1.png"
-	
+ 	var property ultimoImput = down
+ 	
+
+ 	method posicionAdelante(direccion) {
+ 		var aux
+ 		if(direccion == down){aux=self.position().down(1)}
+ 		else if (direccion == up){aux=self.position().up(1)}
+ 		else if (direccion == left){aux=self.position().left(1)}
+ 		else{aux=self.position().right(1)}
+ 		
+ 		return aux
+ 	}
+ 	
+ 	 method posicionAdelante2(direccion) {
+ 		var aux
+ 		if(direccion == down){aux=self.position().down(2)}
+ 		else if (direccion == up){aux=self.position().up(2)}
+ 		else if (direccion == left){aux=self.position().left(2)}
+ 		else{aux=self.position().right(2)}
+ 		
+ 		return aux
+ 	
+ 	}
+ 	
+	method image() = "roberto/character_" + ultimoImput + ".png"
+
 	method revisar(direccion, haciaDondeMira){
-		haciaDonde = haciaDondeMira
+		ultimoImput = haciaDondeMira
 		ultimaDireccion = direccion
 		if ((cajas.listaCajas().any{unObjeto=> unObjeto.position() == direccion}) or
 			(paredes.listaParedes().any{unObjeto=> unObjeto.position() == direccion})){
-			game.say(self,"no puedo avanzar, hay un objeto")
+			//game.say(self,"no puedo avanzar, hay un objeto")
 		}
 		else{
 			self.mover(direccion)
@@ -29,25 +49,24 @@ object karoshi {
 	method mover(nuevaDireccion){
 		
 		self.position(nuevaDireccion)
-//		if (ultimaDireccion.x()>nuevaDireccion.x()){
-//			haciaDonde = left
-//		}
-//		else if (ultimaDireccion.x()<nuevaDireccion.x()){
-//			haciaDonde = right
-//		}
-//		else if (ultimaDireccion.y()>nuevaDireccion.y()){
-//			haciaDonde = down
-//		}
-//		else if (ultimaDireccion.y()<nuevaDireccion.y()){
-//			haciaDonde = up
-//		}
-//		ultimaDireccion = nuevaDireccion
+
+	}
+	//LO HAGO CON IF DEPSUES VEMOS COMO ARREGLARLO.
+	method accion(){
+		cajas.listaCajas().forEach{unaCaja => 
+			if(unaCaja.position() == self.posicionAdelante(ultimoImput)){
+				unaCaja.revisar(self.posicionAdelante2(ultimoImput))
+			}
+
+	}
+			
+
 		
+			
 	}
 	
-	method accion(){
-		if (caja.position()) == ultimaDireccion)
-	}
+		
+	
 }
 
 //objetos de prueba
