@@ -50,6 +50,7 @@ class Caja{
 	
 	method mover(unaDireccion){
 		 position = unaDireccion
+		 config.ganar()
 	}
 	
 }
@@ -63,6 +64,7 @@ object metas{
 }
 class Meta{
 	var property position
+	method cajaEnSitio() = cajas.listaCajas().any{unaCaja => unaCaja.position() == self.position()}
 	method image() = "roberto/goal_tile.png"
 }
 

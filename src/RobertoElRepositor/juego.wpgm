@@ -11,12 +11,7 @@ program juego {
 	game.cellSize(64)
 	game.boardGround("roberto/floor_tile.png")
 	game.title("Juego Base")
-	//game.addVisual(box)
-	//game.addVisual(pepita)
-	//game.addVisual(wallTile)
-	
-	
-	//game.addVisualCharacter(karoshi)
+
 	
 	paredes.crearParedes()
 	paredes.listaParedes().forEach{unaPared => game.addVisual(unaPared)}
