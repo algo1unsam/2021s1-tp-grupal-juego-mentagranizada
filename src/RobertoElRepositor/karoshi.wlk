@@ -5,16 +5,13 @@ import objetos.*
 object karoshi {
 
 	var property position
-	var property ultimoImput = down
+	var posicionInicial
+	var property ultimoInput = down
 
-	method image() = "roberto/character_" + ultimoImput + ".png"
-
-	method posicionInicial(x, y) {
-		position = game.at(x, y)
-	}
+	method image() = "roberto/character_" + ultimoInput + ".png"
 
 	method revisar(nuevaPosicion, direccion) {
-		ultimoImput = direccion
+		ultimoInput = direccion
 		if (colisionables.listaColisionables().any{ unObjeto => unObjeto.position() == nuevaPosicion }) {
 		// Si hay algo con lo que colisiona, no hace nada.
 		} else {
@@ -26,15 +23,21 @@ object karoshi {
 		self.position(nuevaPosicion)
 	}
 
-	method inicializarEn(x,y){
-		position = game.at(x, y)
-		game.addVisual(karoshi)
-	}
+	method reiniciarPosicion(){
+        position = posicionInicial
+        ultimoInput = down
+    }
+
+    method inicializarEn(x,y){
+        position = game.at(x, y)
+        posicionInicial = game.at(x, y)
+        game.addVisual(karoshi)
+    }
 	// LO HAGO CON IF DEPSUES VEMOS COMO ARREGLARLO.
 	method accion() {
 		cajas.listaCajas().forEach{ unaCaja =>
-			if (unaCaja.position() == self.posicionAdelante(ultimoImput)) {
-				unaCaja.revisar(self.posicionAdelante2(ultimoImput))
+			if (unaCaja.position() == self.posicionAdelante(ultimoInput)) {
+				unaCaja.revisar(self.posicionAdelante2(ultimoInput))
 			}
 		}
 	}

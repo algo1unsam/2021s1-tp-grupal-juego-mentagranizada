@@ -3,6 +3,21 @@ import config.*
 import objetos.*
 import karoshi.*
 
+class Nivel {
+
+    method ejecutar() {
+        self.cargarObjetos()
+    }
+
+    method cargarObjetos() {}
+
+    method reiniciar() {
+        cajas.listaCajas().forEach({unaCaja => unaCaja.reiniciarPosicion()})
+        karoshi.reiniciarPosicion()
+    }
+
+}
+
 //Este todavia no hace nada.
 object configNivel {
 
@@ -16,19 +31,7 @@ object configNivel {
 
 }
 
-class Nivel {
 
-//	const property image
-//	const property position = game.origin()
-
-	method ejecutar() {
-		self.cargarObjetos()
-	}
-
-	method cargarObjetos() {
-	}
-
-}
 
 object menu {
 	method position() = game.origin()
@@ -38,16 +41,11 @@ object menu {
 object tutorial inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 
 	override method cargarObjetos() {
-		paredes.crearBordes(3, 8)
+		paredes.crearBordes(8, 3)
 		cajas.crear(3, 1)
 		metas.crear(6, 1)
 		todosLosElementos.agregarATablero()
 		karoshi.inicializarEn(1,1)
-	}
-
-	method reiniciar() {
-		game.clear() // Limpiar todo
-		self.cargarObjetos() // carga el fondo, y carga los objetos
 	}
 
 }
@@ -55,7 +53,7 @@ object tutorial inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 object nivel1 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 
 	override method cargarObjetos() {
-		paredes.crearBordes(5, 7)
+		paredes.crearBordes(7, 5)
 		paredes.crear(1, 2)
 		paredes.crear(5, 2)
 		cajas.crear(3, 3)
@@ -66,7 +64,7 @@ object nivel1 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 		metas.crear(5,3)
 		metas.crear(1,1)
 		metas.crear(5,1)
-		todosLosElementos.agregarATablero()
+		todosLosElementos.agregarATablero() 
 		karoshi.inicializarEn(1,3)
 		
 	}
@@ -100,7 +98,7 @@ object nivel2 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 object nivel3 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 
 	override method cargarObjetos() {
-		paredes.crearBordes(7, 9)
+		paredes.crearBordes(9, 7)
 		paredes.crear(2, 3)
 		paredes.crear(3, 3)
 		paredes.crear(3, 2)

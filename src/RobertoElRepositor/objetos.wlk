@@ -36,8 +36,8 @@ object cajas {
 	const property listaCajas = []
 
 	method crear(x, y) {
-		listaCajas.add(new Caja(position = game.at(x, y)))
-	}
+        listaCajas.add(new Caja(position = game.at(x, y),posicionInicial = game.at(x, y)))
+    }
 
 }
 
@@ -45,6 +45,7 @@ object cajas {
 class Caja {
 
 	var property position
+	const posicionInicial
 
 	method image() = "roberto/box_tile.png"
 
@@ -59,6 +60,10 @@ class Caja {
 		position = unaDireccion
 		config.ganar()
 		return null
+	}
+	
+	method reiniciarPosicion(){
+		position = posicionInicial
 	}
 
 }
