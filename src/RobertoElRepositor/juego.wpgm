@@ -3,25 +3,28 @@ import pepita.*
 import objetos.*
 import config.*
 import karoshi.*
+import niveles.*
 
 program juego {
 	
 	game.width(config.ancho())
 	game.height(config.alto())
 	game.cellSize(64)
-	game.boardGround("roberto/floor_tile.png")
+//	game.boardGround("roberto/floor_tile.png")
 	game.title("Juego Base")
-
-	
-	paredes.crearParedes()
-	paredes.listaParedes().forEach{unaPared => game.addVisual(unaPared)}
-	cajas.listaCajas().forEach{unaCaja => game.addVisual(unaCaja)}
-	metas.listaMetas().forEach{unaMeta => game.addVisual(unaMeta)}
-	
 	config.configurarTeclas()
 	
-	//game.whenCollideDo(karoshi, {i => game.say(karoshi,"Hola")})
-	game.addVisual(karoshi)
-	
+	menu.ejecutar()
 	game.start()
+//	paredes.crearParedes()
+//	paredes.listaParedes().forEach{unaPared => game.addVisual(unaPared)}
+//	cajas.listaCajas().forEach{unaCaja => game.addVisual(unaCaja)}
+//	metas.listaMetas().forEach{unaMeta => game.addVisual(unaMeta)}
+	
+//	config.configurarTeclas()
+	
+	//game.whenCollideDo(karoshi, {i => game.say(karoshi,"Hola")})
+//	game.addVisual(karoshi)
+	
+	
 }

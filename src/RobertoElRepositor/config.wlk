@@ -14,7 +14,7 @@ object config {
 		keyboard.up().onPressDo{karoshi.revisar(karoshi.position().up(1), up)}
 		keyboard.down().onPressDo{karoshi.revisar(karoshi.position().down(1), down)}
 		keyboard.space().onPressDo{karoshi.accion()}
-
+		keyboard.enter().onPressDo{}
 	}
 	method ganar(){
 		if(self.cajasListas()){
