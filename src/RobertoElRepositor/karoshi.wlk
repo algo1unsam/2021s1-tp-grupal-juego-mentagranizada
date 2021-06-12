@@ -3,10 +3,11 @@ import objetos.*
 
 //**Definir nombre**
 object karoshi {
+
 	var property position
- 	var property ultimoImput = down
- 	
- 	method image() = "roberto/character_" + ultimoImput + ".png"
+	var property ultimoImput = down
+
+	method image() = "roberto/character_" + ultimoImput + ".png"
 
 	method posicionInicial(x, y) {
 		position = game.at(x, y)
@@ -24,17 +25,22 @@ object karoshi {
 	method mover(nuevaPosicion) {
 		self.position(nuevaPosicion)
 	}
-	//LO HAGO CON IF DEPSUES VEMOS COMO ARREGLARLO.
-	method accion(){
-		cajas.listaCajas().forEach{unaCaja => 
-			if(unaCaja.position() == self.posicionAdelante(ultimoImput)){
+
+	method inicializarEn(x,y){
+		position = game.at(x, y)
+		game.addVisual(karoshi)
+	}
+	// LO HAGO CON IF DEPSUES VEMOS COMO ARREGLARLO.
+	method accion() {
+		cajas.listaCajas().forEach{ unaCaja =>
+			if (unaCaja.position() == self.posicionAdelante(ultimoImput)) {
 				unaCaja.revisar(self.posicionAdelante2(ultimoImput))
 			}
 		}
 	}
 
-	//REVISAR PARA MEJORAR ESTE METOD0
-	//LO QUE HACE ES VER QUE HAY HACIA DONDE ESTA MIRANDO
+	// REVISAR PARA MEJORAR ESTE METOD0
+	// LO QUE HACE ES VER QUE HAY HACIA DONDE ESTA MIRANDO
 	method posicionAdelante(direccion) {
 		if (direccion == down) {
 			return self.position().down(1)
@@ -45,9 +51,9 @@ object karoshi {
 		} else {
 			return self.position().right(1)
 		}
-		//Es esto o crear un AUX y retornar un aux
+	// Es esto o crear un AUX y retornar un aux
 	}
- 	
+
 	method posicionAdelante2(direccion) {
 		if (direccion == down) {
 			return self.position().down(2)
@@ -59,10 +65,22 @@ object karoshi {
 			return self.position().right(2)
 		}
 	}
-	
+
+}
+//Solo estan de prueba
+object right {
+
 }
 
-object right{}
-object left{}
-object up{}
-object down{}
+object left {
+
+}
+
+object up {
+
+}
+
+object down {
+
+}
+

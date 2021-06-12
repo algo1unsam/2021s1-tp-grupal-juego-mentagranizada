@@ -3,13 +3,12 @@ import config.*
 import niveles.*
 
 program juego {
-	
 	game.width(config.ancho())
 	game.height(config.alto())
 	game.cellSize(64)
 	game.title("Tito el MueveCajas")
+	game.boardGround("roberto/floor_tile.png")
 	config.configurarTeclas()
-	tutorial.ejecutar()
+	nivel3.ejecutar()
 	game.start()
-
 }
