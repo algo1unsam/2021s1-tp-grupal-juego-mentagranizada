@@ -2,6 +2,7 @@ import wollok.game.*
 import karoshi.*
 import objetos.*
 import niveles.*
+import menuYExtras.*
 
 object config {
 
@@ -16,6 +17,7 @@ object config {
 		keyboard.down().onPressDo{ karoshi.revisar(karoshi.position().down(1), down)}
 		keyboard.space().onPressDo{ karoshi.accion()}
 		keyboard.r().onPressDo{ tutorial.reiniciar()}
+		keyboard.enter().onPressDo{ menu.empezarJuego()}	
 	// keyboard.a().onPressDo{nivelActual.cambiarDeNivel()}
 	}
 

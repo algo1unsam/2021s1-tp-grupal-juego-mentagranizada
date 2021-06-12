@@ -1,6 +1,7 @@
 import wollok.game.*
 import config.*
 import niveles.*
+import menuYExtras.*
 
 program juego {
 	game.width(config.ancho())
@@ -9,7 +10,7 @@ program juego {
 	game.title("Tito el MueveCajas")
 	game.boardGround("roberto/floor_tile.png")
 	config.configurarTeclas()
-	nivel3.ejecutar()
+	menu.ejecutar()
 	game.start()
 }
 

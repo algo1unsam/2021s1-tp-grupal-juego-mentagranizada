@@ -8,6 +8,7 @@ class Nivel {
 
     method ejecutar() {
         self.cargarObjetos()
+        configNivel.nivelActual(self)
     }
 
     method cargarObjetos() {}
@@ -22,24 +23,18 @@ class Nivel {
 //Este todavia no hace nada.
 object configNivel {
 
-	var property nivelActual = tutorial
-	var property siguienteNivel = tutorial
+	var property nivelActual = menu
+	var property siguienteNivel = menu
 
 	method cambiarDeNivel() {
-		game.clear()
+		todosLosExtras.extrasLista().forEach({unExtra => game.removeVisual(unExtra)})
 		siguienteNivel.ejecutar()
 	}
 
 }
 
-
-
-object menu {
-	method position() = game.origin()
-	method image() = "roberto/MAIN.png"
-}
-
 object tutorial inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
+
 
 	override method cargarObjetos() {
 		paredes.crearBordes(9, 3, 1, 1)
