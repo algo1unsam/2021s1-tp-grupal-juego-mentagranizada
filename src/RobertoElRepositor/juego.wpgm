@@ -12,3 +12,6 @@ program juego {
 	tutorial.ejecutar()
 	game.start()
 }
+
+
+//prueba
