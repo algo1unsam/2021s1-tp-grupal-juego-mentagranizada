@@ -9,7 +9,7 @@ program juego {
 	game.title("Tito el MueveCajas")
 	game.boardGround("roberto/floor_tile.png")
 	config.configurarTeclas()
-	tutorial.ejecutar()
+	nivel3.ejecutar()
 	game.start()
 }
 

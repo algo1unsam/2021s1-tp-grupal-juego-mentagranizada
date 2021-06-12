@@ -2,6 +2,7 @@ import wollok.game.*
 import config.*
 import objetos.*
 import karoshi.*
+import menuYExtras.*
 
 class Nivel {
 
@@ -41,11 +42,12 @@ object menu {
 object tutorial inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 
 	override method cargarObjetos() {
-		paredes.crearBordes(8, 3)
-		cajas.crear(3, 1)
-		metas.crear(6, 1)
+		paredes.crearBordes(9, 3, 1, 1)
+		game.addVisual(instrucciones)
+		cajas.crear(5, 2)
+		metas.crear(8, 2)
 		todosLosElementos.agregarATablero()
-		karoshi.inicializarEn(1,1)
+		karoshi.inicializarEn(2,2)
 	}
 
 }
@@ -53,19 +55,19 @@ object tutorial inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 object nivel1 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 
 	override method cargarObjetos() {
-		paredes.crearBordes(7, 5)
-		paredes.crear(1, 2)
-		paredes.crear(5, 2)
-		cajas.crear(3, 3)
-		cajas.crear(2, 2)
-		cajas.crear(3, 2)
-		cajas.crear(4, 2)
-		metas.crear(1, 3)
-		metas.crear(5,3)
-		metas.crear(1,1)
-		metas.crear(5,1)
+		paredes.crearBordes(7, 5, 2, 2)
+		paredes.crear(3, 4)
+		paredes.crear(7, 4)
+		cajas.crear(4, 4)
+		cajas.crear(5, 4)
+		cajas.crear(6, 4)
+		cajas.crear(5, 5)
+		metas.crear(3, 3)
+		metas.crear(3, 5)
+		metas.crear(7, 3)
+		metas.crear(7, 5)
 		todosLosElementos.agregarATablero() 
-		karoshi.inicializarEn(1,3)
+		karoshi.inicializarEn(4,5)
 		
 	}
 
@@ -74,22 +76,22 @@ object nivel1 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 object nivel2 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 
 	override method cargarObjetos() {
-		paredes.crearBordes(7,8)
-		paredes.crear(3, 2)
-		paredes.crear(3, 5)
+		paredes.crearBordes(7, 7, 2, 1)
+		paredes.crear(5, 2)
+		paredes.crear(5, 5)
 
 		
-		cajas.crear(2, 3)
-		cajas.crear(2, 4)
+		cajas.crear(6, 3)
+		cajas.crear(6, 4)
 		cajas.crear(4, 3)
 		cajas.crear(4, 4)
 		
-		metas.crear(2, 2)
-		metas.crear(2, 5)
 		metas.crear(4, 2)
+		metas.crear(6, 2)
+		metas.crear(6, 5)
 		metas.crear(4, 5)
 		todosLosElementos.agregarATablero()
-		karoshi.inicializarEn(1,1)
+		karoshi.inicializarEn(5,6)
 		
 	}
 
@@ -98,29 +100,29 @@ object nivel2 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 object nivel3 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 
 	override method cargarObjetos() {
-		paredes.crearBordes(9, 7)
-		paredes.crear(2, 3)
-		paredes.crear(3, 3)
-		paredes.crear(3, 2)
-		paredes.crear(5, 3)
-		paredes.crear(5, 4)
-		paredes.crear(6, 3)
+		paredes.crearBordes(9, 7, 1, 1)
+		paredes.crear(4, 3)
+		paredes.crear(4, 4)
+		paredes.crear(3, 4)
+		paredes.crear(7, 4)
+		paredes.crear(6, 4)
+		paredes.crear(6, 5)
 		
-		cajas.crear(3, 1)
-		cajas.crear(2, 4)
-		cajas.crear(2, 5)
-		cajas.crear(5, 5)
-		cajas.crear(6, 1)
-		cajas.crear(6, 2)
+		cajas.crear(4, 2)
+		cajas.crear(7, 2)
+		cajas.crear(7, 3)
+		cajas.crear(3, 5)
+		cajas.crear(3, 6)
+		cajas.crear(6, 6)
 		
-		metas.crear(1, 1)
-		metas.crear(1, 2)
-		metas.crear(2, 1)
-		metas.crear(6, 5)
-		metas.crear(7, 4)
-		metas.crear(7, 5)
+		metas.crear(2, 2)
+		metas.crear(3, 2)
+		metas.crear(2, 3)
+		metas.crear(8, 6)
+		metas.crear(7, 6)
+		metas.crear(8, 5)
 		todosLosElementos.agregarATablero()
-		karoshi.inicializarEn(4,2)
+		karoshi.inicializarEn(5,3)
 		
 	}
 

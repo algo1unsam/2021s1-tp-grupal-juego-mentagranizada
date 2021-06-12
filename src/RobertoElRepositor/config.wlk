@@ -5,8 +5,8 @@ import niveles.*
 
 object config {
 
-	const property alto = 10
-	const property ancho = 10
+	const property alto = 9
+	const property ancho = 11
 	var unTexto = "No ganaste"
 
 	method configurarTeclas() {
