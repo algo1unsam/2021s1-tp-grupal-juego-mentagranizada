@@ -14,16 +14,17 @@ object config {
 		keyboard.up().onPressDo{karoshi.revisar(karoshi.position().up(1), up)}
 		keyboard.down().onPressDo{karoshi.revisar(karoshi.position().down(1), down)}
 		keyboard.space().onPressDo{karoshi.accion()}
-		keyboard.a().onPressDo{nivelActual.cambiarDeNivel()}
+		keyboard.r().onPressDo{tutorial.reiniciar()}
+		//keyboard.a().onPressDo{nivelActual.cambiarDeNivel()}
 	}
 	method ganar(){
-		if(self.cajasListas()){
+		if(self.cajasEnSuLugar()){
 			 unTexto = "Gane"
 			 return self.decirGane() 
 		}
 		return null
 	}
-	method cajasListas() = metas.listaMetas().all{unaMeta => unaMeta.cajaEnSitio()}
+	method cajasEnSuLugar() = metas.listaMetas().all{unaMeta => unaMeta.cajaEnSitio()}
 	method decirGane() = game.say(karoshi,unTexto) //metodo debugg
 	
 }

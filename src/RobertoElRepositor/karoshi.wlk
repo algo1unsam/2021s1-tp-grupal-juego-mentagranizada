@@ -1,55 +1,28 @@
 import wollok.game.*
 import objetos.*
-//Andi voto Ruben
-//Sabri voto Pepe
-//Nico voto Kniga
-//LocoLope
+
+//**Definir nombre**
 object karoshi {
-	const posicionInicial = game.at(2,3)
-	var property position = posicionInicial
-	var property ultimaDireccion = posicionInicial
+	var property position
  	var property ultimoImput = down
  	
  	method image() = "roberto/character_" + ultimoImput + ".png"
 
- 	method posicionAdelante(direccion) {
- 		var aux
- 		if(direccion == down){aux=self.position().down(1)}
- 		else if (direccion == up){aux=self.position().up(1)}
- 		else if (direccion == left){aux=self.position().left(1)}
- 		else{aux=self.position().right(1)}
- 		
- 		return aux
- 	}
- 	
- 	 method posicionAdelante2(direccion) {
- 		var aux
- 		if(direccion == down){aux=self.position().down(2)}
- 		else if (direccion == up){aux=self.position().up(2)}
- 		else if (direccion == left){aux=self.position().left(2)}
- 		else{aux=self.position().right(2)}
- 		
- 		return aux
- 	
- 	}
- 	
-	
+	method posicionInicial(x, y) {
+		position = game.at(x, y)
+	}
 
-	method revisar(direccion, haciaDondeMira){
-		ultimoImput = haciaDondeMira
-		ultimaDireccion = direccion
-		if (colisionables.listaColisionables().any{unObjeto=> unObjeto.position() == direccion}){
-			//game.say(self,"no puedo avanzar, hay un objeto")
-		}
-		else{
-			self.mover(direccion)
+	method revisar(nuevaPosicion, direccion) {
+		ultimoImput = direccion
+		if (colisionables.listaColisionables().any{ unObjeto => unObjeto.position() == nuevaPosicion }) {
+		// Si hay algo con lo que colisiona, no hace nada.
+		} else {
+			self.mover(nuevaPosicion)
 		}
 	}
-	
-	method mover(nuevaDireccion){
-		
-		self.position(nuevaDireccion)
 
+	method mover(nuevaPosicion) {
+		self.position(nuevaPosicion)
 	}
 	//LO HAGO CON IF DEPSUES VEMOS COMO ARREGLARLO.
 	method accion(){
@@ -57,22 +30,38 @@ object karoshi {
 			if(unaCaja.position() == self.posicionAdelante(ultimoImput)){
 				unaCaja.revisar(self.posicionAdelante2(ultimoImput))
 			}
-
+		}
 	}
-			
 
-		
-			
+	//REVISAR PARA MEJORAR ESTE METOD0
+	//LO QUE HACE ES VER QUE HAY HACIA DONDE ESTA MIRANDO
+	method posicionAdelante(direccion) {
+		if (direccion == down) {
+			return self.position().down(1)
+		} else if (direccion == up) {
+			return self.position().up(1)
+		} else if (direccion == left) {
+			return self.position().left(1)
+		} else {
+			return self.position().right(1)
+		}
+		//Es esto o crear un AUX y retornar un aux
 	}
-	
-		
+ 	
+	method posicionAdelante2(direccion) {
+		if (direccion == down) {
+			return self.position().down(2)
+		} else if (direccion == up) {
+			return self.position().up(2)
+		} else if (direccion == left) {
+			return self.position().left(2)
+		} else {
+			return self.position().right(2)
+		}
+	}
 	
 }
 
-//objetos de prueba
-//class Direccion{
-//	method sprite()="character_" + karoshi.ultimaDireccion() + ".png"
-//}
 object right{}
 object left{}
 object up{}
