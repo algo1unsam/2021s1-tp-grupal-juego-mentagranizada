@@ -10,6 +10,7 @@ object karoshi {
 	var property ultimaDireccion = posicionInicial
  	var property ultimoImput = down
  	
+ 	method image() = "roberto/character_" + ultimoImput + ".png"
 
  	method posicionAdelante(direccion) {
  		var aux
@@ -32,13 +33,12 @@ object karoshi {
  	
  	}
  	
-	method image() = "roberto/character_" + ultimoImput + ".png"
+	
 
 	method revisar(direccion, haciaDondeMira){
 		ultimoImput = haciaDondeMira
 		ultimaDireccion = direccion
-		if ((cajas.listaCajas().any{unObjeto=> unObjeto.position() == direccion}) or
-			(paredes.listaParedes().any{unObjeto=> unObjeto.position() == direccion})){
+		if (colisionables.listaColisionables().any{unObjeto=> unObjeto.position() == direccion}){
 			//game.say(self,"no puedo avanzar, hay un objeto")
 		}
 		else{

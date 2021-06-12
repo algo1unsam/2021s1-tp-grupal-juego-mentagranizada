@@ -10,16 +10,16 @@ program juego {
 	game.width(config.ancho())
 	game.height(config.alto())
 	game.cellSize(64)
-//	game.boardGround("roberto/floor_tile.png")
+	game.boardGround("roberto/floor_tile.png")
 	game.title("Juego Base")
 	config.configurarTeclas()
-	
-	menu.ejecutar()
+	//game.boardGround("roberto/MAIN.png")
+	nivel1.ejecutar()
 	game.start()
 //	paredes.crearParedes()
 //	paredes.listaParedes().forEach{unaPared => game.addVisual(unaPared)}
 //	cajas.listaCajas().forEach{unaCaja => game.addVisual(unaCaja)}
-//	metas.listaMetas().forEach{unaMeta => game.addVisual(unaMeta)}
+//	metas.listaMetas().forEach{unaMe.ta => game.addVisual(unaMeta)}
 	
 //	config.configurarTeclas()
 	

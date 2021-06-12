@@ -3,28 +3,38 @@ import config.*
 import objetos.*
 import karoshi.*
 
+
+
 object nivelActual{
-	var property nivelActual = menu
+	var property siguienteNivel = menu
 	method cambiarDeNivel(){
-		nivelActual.ejecutar()
+		game.clear()
+		siguienteNivel.ejecutar()
 	}
 }
 
-object menu {
-	method ejecutar(){
-		game.boardGround("roberto/MAIN.png")
-			
-	}
+class Nivel{
+	const property image
+	const property position=game.origin()
 	
+	method ejecutar(){
+		game.addVisual(self)
+		self.cargarObjetos()
+	}
+	method cargarObjetos(){}
+
 }
 
-object nivel1 {
+object menu inherits Nivel(image="roberto/MAIN.png"){
+		
+}
+
+object nivel1 inherits Nivel(image="roberto/floor_tile.png"){
 	
-	method ejecutar(){
-		game.boardGround("roberto/floor_tile.png")
-		paredes.crearParedes()
-		paredes.listaParedes().forEach{unaPared => game.addVisual(unaPared)}
-		cajas.listaCajas().forEach{unaCaja => game.addVisual(unaCaja)}
+	override method cargarObjetos(){
+
+		paredes.crearBordes(5,7)
+		colisionables.listaColisionables().forEach{unCoso => game.addVisual(unCoso)}
 		metas.listaMetas().forEach{unaMeta => game.addVisual(unaMeta)}
 		game.addVisual(karoshi)
 	}

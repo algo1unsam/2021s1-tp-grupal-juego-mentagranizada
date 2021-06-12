@@ -8,13 +8,15 @@ class Pared {
 }
 
 object paredes{
-	const alto = config.alto().min(5)
-	const ancho = config.ancho().min(7)
+	//ver si conservamos esto o lo descartamos.
+
+//	const alto = config.alto().min(5)
+//	const ancho = config.ancho().min(7)
 	const property listaParedes = [new Pared(position = game.at(1,2)),new Pared(position = game.at(5,2))]
 	
 	//Este metodo crea cada objeto PARED con su respectiva posicion para luego
 	//poder usar ADDVISUAL y generar las paredes automaticamente con el alto y ancho dado en config.
-	method crearParedes(){
+	method crearBordes(alto,ancho){
 		//columnas
 		alto.times({i => listaParedes.add(new Pared(position = game.at(0,i-1)))})
 		alto.times({i => listaParedes.add(new Pared(position = game.at(ancho-1,i-1)))})
@@ -22,7 +24,6 @@ object paredes{
 		(ancho-2).times({i => listaParedes.add(new Pared(position = game.at(i,0)))})
 		(ancho-2).times({i => listaParedes.add(new Pared(position = game.at(i,alto-1)))})
 	}
-	
 	
 }
 
@@ -51,6 +52,7 @@ class Caja{
 	method mover(unaDireccion){
 		 position = unaDireccion
 		 config.ganar()
+		 return null
 	}
 	
 }
@@ -68,8 +70,8 @@ class Meta{
 	method image() = "roberto/goal_tile.png"
 }
 
-object oC {
-	const property listaOc=[paredes.listaParedes()]+[cajas.listaCajas()]
+object colisionables {
+	const property listaColisionables=[paredes.listaParedes(),cajas.listaCajas()].flatten()
 	
 }
 

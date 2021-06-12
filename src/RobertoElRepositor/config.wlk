@@ -1,12 +1,12 @@
 import wollok.game.*
 import karoshi.*
 import objetos.*
+import niveles.*
 
 object config {
-	const property alto = 6
-	const property ancho = 7
+	const property alto = 7
+	const property ancho = 10
 	var unTexto = "No ganaste"
-	const pruebaBORRAR 
 	
 	method configurarTeclas(){
 		keyboard.right().onPressDo{karoshi.revisar(karoshi.position().right(1), right)}
@@ -14,14 +14,14 @@ object config {
 		keyboard.up().onPressDo{karoshi.revisar(karoshi.position().up(1), up)}
 		keyboard.down().onPressDo{karoshi.revisar(karoshi.position().down(1), down)}
 		keyboard.space().onPressDo{karoshi.accion()}
-		keyboard.enter().onPressDo{}
+		keyboard.a().onPressDo{nivelActual.cambiarDeNivel()}
 	}
 	method ganar(){
 		if(self.cajasListas()){
 			 unTexto = "Gane"
 			 return self.decirGane() 
 		}
-		return pruebaBORRAR
+		return null
 	}
 	method cajasListas() = metas.listaMetas().all{unaMeta => unaMeta.cajaEnSitio()}
 	method decirGane() = game.say(karoshi,unTexto) //metodo debugg
