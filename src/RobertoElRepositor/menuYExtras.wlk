@@ -15,12 +15,12 @@ object menu {
 	
 	method ejecutar(){
 		game.addVisual(self)
-		todosLosExtras.extrasLista().add(self)
+		todosLosExtras.agregar(self)
 		return null
 	}
 	
 	method empezarJuego(){
-		if (configNivel.nivelActual() == self){
+		if (configNivel.siguienteNivel() == self){
 			configNivel.siguienteNivel(tutorial)
 			configNivel.cambiarDeNivel()
 			}
@@ -28,5 +28,12 @@ object menu {
 }
 
 object todosLosExtras {
-	const property extrasLista = []
+	const lista = []
+	method agregar(visual){
+		lista.add(visual)
+	}
+	method limpiar(){
+		lista.forEach({unExtra => game.removeVisual(unExtra)})
+		lista.clear()
+	}
 }

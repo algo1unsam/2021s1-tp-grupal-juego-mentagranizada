@@ -12,7 +12,7 @@ object karoshi {
 
 	method revisar(nuevaPosicion, direccion) {
 		ultimoInput = direccion
-		if (colisionables.listaColisionables().any{ unObjeto => unObjeto.position() == nuevaPosicion }) {
+		if (colisionables.lista().any{ unObjeto => unObjeto.position() == nuevaPosicion }) {
 		// Si hay algo con lo que colisiona, no hace nada.
 		} else {
 			self.mover(nuevaPosicion)
@@ -27,15 +27,19 @@ object karoshi {
         position = posicionInicial
         ultimoInput = down
     }
-
+	method moverA(x,y){
+        position = game.at(x, y)
+        posicionInicial = game.at(x, y)		
+        ultimoInput = down
+	}
     method inicializarEn(x,y){
         position = game.at(x, y)
         posicionInicial = game.at(x, y)
-        game.addVisual(karoshi)
+        game.addVisual(self)
     }
 	// LO HAGO CON IF DEPSUES VEMOS COMO ARREGLARLO.
 	method accion() {
-		cajas.listaCajas().forEach{ unaCaja =>
+		cajas.lista().forEach{ unaCaja =>
 			if (unaCaja.position() == self.posicionAdelante(ultimoInput)) {
 				unaCaja.revisar(self.posicionAdelante2(ultimoInput))
 			}
@@ -68,7 +72,7 @@ object karoshi {
 			return self.position().right(2)
 		}
 	}
-
+//comit
 }
 //Solo estan de prueba
 object right {
@@ -86,4 +90,3 @@ object up {
 object down {
 
 }
-

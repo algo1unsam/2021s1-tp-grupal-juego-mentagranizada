@@ -13,5 +13,3 @@ program juego {
 	menu.ejecutar()
 	game.start()
 }
-
-//prueba

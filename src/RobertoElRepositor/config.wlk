@@ -8,7 +8,6 @@ object config {
 
 	const property alto = 9
 	const property ancho = 11
-	var unTexto = "No ganaste"
 
 	method configurarTeclas() {
 		keyboard.right().onPressDo{ karoshi.revisar(karoshi.position().right(1), right)}
@@ -24,12 +23,12 @@ object config {
 	method ganar() {
 		if (self.cajasEnSuLugar()) {
 			game.say(karoshi,"Siguiente nivel es: "+configNivel.siguienteNivel())
+			configNivel.cambiarDeNivel()
+			
 		}
 		return null
 	}
 
-	method cajasEnSuLugar() = metas.listaMetas().all{ unaMeta => unaMeta.cajaEnSitio() }
-
-	method decirGane() = game.say(karoshi, unTexto) // metodo debugg
+	method cajasEnSuLugar() = metas.lista().all{ unaMeta => unaMeta.cajaEnSitio() }
 
 }

@@ -15,7 +15,7 @@ class Nivel {
     method cargarObjetos() {}
 
     method reiniciar() {
-        cajas.listaCajas().forEach({unaCaja => unaCaja.reiniciarPosicion()})
+        cajas.lista().forEach({unaCaja => unaCaja.reiniciarPosicion()})
         karoshi.reiniciarPosicion()
     }
 
@@ -28,7 +28,10 @@ object configNivel {
 	var property siguienteNivel = menu
 
 	method cambiarDeNivel() {
-		todosLosExtras.extrasLista().forEach({unExtra => game.removeVisual(unExtra)})
+		cajas.eliminar()
+		paredes.eliminar()
+		metas.eliminar()
+		todosLosExtras.limpiar()
 		siguienteNivel.ejecutar()
 	}
 
@@ -38,11 +41,16 @@ object tutorial inherits Nivel(siguienteNivel = nivel1)/*(image = "roberto/floor
 
 
 	override method cargarObjetos() {
-		paredes.crearBordes(9, 3, 1, 1)
 		game.addVisual(instrucciones)
+		paredes.crearBordes(9, 3, 1, 1)
 		cajas.crear(5, 2)
 		metas.crear(8, 2)
-		todosLosElementos.agregarATablero()
+		
+		colisionables.actualizar() // Despues mover abjo de cambiarNivel->SiguienteNivel ejecutar.
+
+		paredes.cargar()
+		metas.cargar()
+		cajas.cargar()
 		karoshi.inicializarEn(2,2)
 	}
 
@@ -62,8 +70,16 @@ object nivel1 inherits Nivel(siguienteNivel = nivel2)/*(image = "roberto/floor_t
 		metas.crear(3, 5)
 		metas.crear(7, 3)
 		metas.crear(7, 5)
-		todosLosElementos.agregarATablero() 
-		karoshi.inicializarEn(4,5)
+
+		colisionables.actualizar()
+		
+		karoshi.moverA(4,5)
+		
+		paredes.cargar()
+		cajas.cargar()
+		metas.cargar()
+
+
 		
 	}
 
@@ -86,8 +102,14 @@ object nivel2 inherits Nivel(siguienteNivel = nivel3)/*(image = "roberto/floor_t
 		metas.crear(6, 2)
 		metas.crear(6, 5)
 		metas.crear(4, 5)
-		todosLosElementos.agregarATablero()
-		karoshi.inicializarEn(5,6)
+		
+		colisionables.actualizar()
+		karoshi.moverA(5,6)
+		
+		paredes.cargar()
+		cajas.cargar()
+		metas.cargar()
+
 		
 	}
 
@@ -117,11 +139,14 @@ object nivel3 inherits Nivel(siguienteNivel = nivel1)/*(image = "roberto/floor_t
 		metas.crear(8, 6)
 		metas.crear(7, 6)
 		metas.crear(8, 5)
-		todosLosElementos.agregarATablero()
-		karoshi.inicializarEn(5,3)
+		
+		colisionables.actualizar()
+		karoshi.moverA(5,3)
+		
+		paredes.cargar()
+		cajas.cargar()
+		metas.cargar()
 		
 	}
 
 }
-
-
