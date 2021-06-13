@@ -23,8 +23,7 @@ object config {
 
 	method ganar() {
 		if (self.cajasEnSuLugar()) {
-			unTexto = "Gane"
-			return self.decirGane()
+			game.say(karoshi,"Siguiente nivel es: "+configNivel.siguienteNivel())
 		}
 		return null
 	}
@@ -34,4 +33,3 @@ object config {
 	method decirGane() = game.say(karoshi, unTexto) // metodo debugg
 
 }
-

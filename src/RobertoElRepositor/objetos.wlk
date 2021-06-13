@@ -101,4 +101,3 @@ object todosLosElementos {
 		todosLosElementos.forEach{ unElemento => game.addVisual(unElemento)}
 	}
 }
-

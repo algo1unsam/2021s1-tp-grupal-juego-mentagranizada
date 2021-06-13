@@ -5,12 +5,13 @@ import karoshi.*
 import menuYExtras.*
 
 class Nivel {
-
+	
+	const property siguienteNivel
     method ejecutar() {
         self.cargarObjetos()
-        configNivel.nivelActual(self)
+        configNivel.siguienteNivel(self.siguienteNivel())
     }
-
+	
     method cargarObjetos() {}
 
     method reiniciar() {
@@ -33,7 +34,7 @@ object configNivel {
 
 }
 
-object tutorial inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
+object tutorial inherits Nivel(siguienteNivel = nivel1)/*(image = "roberto/floor_tile.png")*/ {
 
 
 	override method cargarObjetos() {
@@ -47,7 +48,7 @@ object tutorial inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 
 }
 
-object nivel1 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
+object nivel1 inherits Nivel(siguienteNivel = nivel2)/*(image = "roberto/floor_tile.png")*/ {
 
 	override method cargarObjetos() {
 		paredes.crearBordes(7, 5, 2, 2)
@@ -68,7 +69,7 @@ object nivel1 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 
 }
 
-object nivel2 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
+object nivel2 inherits Nivel(siguienteNivel = nivel3)/*(image = "roberto/floor_tile.png")*/ {
 
 	override method cargarObjetos() {
 		paredes.crearBordes(7, 7, 2, 1)
@@ -92,7 +93,7 @@ object nivel2 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
 
 }
 
-object nivel3 inherits Nivel/*(image = "roberto/floor_tile.png")*/ {
+object nivel3 inherits Nivel(siguienteNivel = nivel1)/*(image = "roberto/floor_tile.png")*/ {
 
 	override method cargarObjetos() {
 		paredes.crearBordes(9, 7, 1, 1)
