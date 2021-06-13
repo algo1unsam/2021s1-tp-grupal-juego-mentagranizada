@@ -1,8 +1,8 @@
 import wollok.game.*
 import config.*
-const pared = "roberto/wall_tile.png"
-const caja = "roberto/box_tile.png"
-const meta = "roberto/goal_tile.png"
+const pared = "roberto/pared_bloque.png"
+const caja = "roberto/caja_bloque.png"
+const meta = "roberto/meta_bloque.png"
 
 class Elementos{
 	var property position
@@ -48,13 +48,7 @@ class Caja inherits Elementos{
 }
 
 //contenedor
-object paredes {
-
-	// ver si conservamos esto o lo descartamos.
-	const lista = []
-	
-	method lista() = lista
-
+object paredes inherits ConfigElementos{
 	// Este metodo crea cada objeto PARED con su respectiva posicion para luego
 	// poder usar ADDVISUAL y generar las paredes automaticamente con el alto y ancho dado en config.
 	method crearBordes(ancho,alto,origenX,origenY) {
@@ -69,58 +63,56 @@ object paredes {
 	method crear(x, y) {
         lista.add(new Pared(position = game.at(x, y)))
     }
-    
-    method cargar(){
+}
+
+class ConfigElementos {
+	const property lista = []
+	
+	method cargar(){
 		lista.forEach{unElemento => game.addVisual(unElemento)}
 	}
 	
 	method eliminar(){
-		lista.forEach{unElemento => unElemento.position(game.at(1,8))}
+		lista.forEach{unElemento => game.removeVisual(unElemento)}
 		lista.forEach{unElemento => lista.remove(unElemento)}
-		//lista.forEach{unElemento => game.removeVisual(unElemento)}
 	}
 }
 
-object cajas {
-
-	const property lista = []
+object cajas inherits ConfigElementos{
 
 	method crear(x, y) {
         lista.add(new Caja(position = game.at(x, y),posicionInicial = game.at(x, y)))
     }
     
-    method cargar(){
-		lista.forEach{unElemento => game.addVisual(unElemento)}
-	}
-	
-	method eliminar(){
-		lista.forEach{unElemento => unElemento.position(game.at(1,8))}
-		lista.forEach{unElemento => lista.remove(unElemento)}
+	method reiniciarPosicion(){
+		lista.forEach({unaCaja => unaCaja.reiniciarPosicion()})
 	}
 
 }
 
-//Esto despues convertir a CLASS y almacenarlos en lista CAJAS
-
-
-object metas {
-
-	const property lista = []
+object metas inherits ConfigElementos{
 
 	method crear(x, y) {
         lista.add(new Meta(position = game.at(x, y)))
     }
     
-    method cargar(){
-		lista.forEach{unElemento => game.addVisual(unElemento)}
+    method cajasEnSuLugar() = lista.all{ unaMeta => unaMeta.cajaEnSitio() }
+}
+
+object todosLosElementos {
+	
+	method cargar(){
+		paredes.cargar()
+		cajas.cargar()
+		metas.cargar()		
 	}
 	
 	method eliminar(){
-		lista.forEach{unElemento => unElemento.position(game.at(1,8))}
-		lista.forEach{unElemento => lista.remove(unElemento)}
+		cajas.eliminar()
+		paredes.eliminar()
+		metas.eliminar()
 	}
 }
-
 
 object colisionables {
 
@@ -129,6 +121,4 @@ object colisionables {
 	method actualizar() {
 		lista = [paredes.lista(), cajas.lista()].flatten()
 	}
-	
-
 }

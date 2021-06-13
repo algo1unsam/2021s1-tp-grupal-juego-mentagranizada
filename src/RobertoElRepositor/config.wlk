@@ -5,6 +5,7 @@ import niveles.*
 import menuYExtras.*
 
 object config {
+	const tiempo = 400
 
 	const property alto = 9
 	const property ancho = 11
@@ -15,20 +16,16 @@ object config {
 		keyboard.up().onPressDo{ karoshi.revisar(karoshi.position().up(1), up)}
 		keyboard.down().onPressDo{ karoshi.revisar(karoshi.position().down(1), down)}
 		keyboard.space().onPressDo{ karoshi.accion()}
-		keyboard.r().onPressDo{ tutorial.reiniciar()}
-		keyboard.enter().onPressDo{ menu.empezarJuego()}	
-	// keyboard.a().onPressDo{nivelActual.cambiarDeNivel()}
+		keyboard.r().onPressDo{ configNivel.reiniciar()}
+		keyboard.enter().onPressDo{ menu.empezarJuego()}
 	}
-
+	
 	method ganar() {
-		if (self.cajasEnSuLugar()) {
-			game.say(karoshi,"Siguiente nivel es: "+configNivel.siguienteNivel())
-			configNivel.cambiarDeNivel()
-			
+	if (metas.cajasEnSuLugar()) {
+		game.schedule(tiempo, {=> configNivel.cambiarDeNivel()})	
 		}
-		return null
+	return null
 	}
-
 	method cajasEnSuLugar() = metas.lista().all{ unaMeta => unaMeta.cajaEnSitio() }
 
 }

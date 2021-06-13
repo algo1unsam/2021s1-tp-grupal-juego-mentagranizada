@@ -1,5 +1,7 @@
 import wollok.game.*
 import objetos.*
+import niveles.*
+import config.*
 
 //**Definir nombre**
 object karoshi {
@@ -27,11 +29,13 @@ object karoshi {
         position = posicionInicial
         ultimoInput = down
     }
+    
 	method moverA(x,y){
         position = game.at(x, y)
         posicionInicial = game.at(x, y)		
         ultimoInput = down
 	}
+	
     method inicializarEn(x,y){
         position = game.at(x, y)
         posicionInicial = game.at(x, y)
@@ -72,9 +76,9 @@ object karoshi {
 			return self.position().right(2)
 		}
 	}
-//comit
+	
 }
-//Solo estan de prueba
+
 object right {
 
 }

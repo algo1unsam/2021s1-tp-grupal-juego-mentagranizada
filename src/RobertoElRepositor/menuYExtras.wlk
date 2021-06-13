@@ -2,33 +2,42 @@ import wollok.game.*
 import niveles.*
 import config.*
 
-object instrucciones {
-		method image() = "roberto/tutorial.png"
-		method position(){
-			return game.at(0, 5)	
-		}
-}
-
-object menu {
-	method image()= "roberto/MAIN.png"
-	method position() = game.origin()
+class Extra {
+	const position = game.origin()
+	
+	method image() = "roberto/"+self+".png"
+	
+	method position() = position
 	
 	method ejecutar(){
 		game.addVisual(self)
 		todosLosExtras.agregar(self)
-		return null
 	}
-	
+}
+
+object instrucciones inherits Extra(position = game.at(0,5)){
+
+}
+
+object menu inherits Extra {
+
 	method empezarJuego(){
 		if (configNivel.siguienteNivel() == self){
 			configNivel.siguienteNivel(tutorial)
 			configNivel.cambiarDeNivel()
+			return null
 			}
+		return null
 	}
+}
+
+object final inherits Extra {
+
 }
 
 object todosLosExtras {
 	const lista = []
+	
 	method agregar(visual){
 		lista.add(visual)
 	}
