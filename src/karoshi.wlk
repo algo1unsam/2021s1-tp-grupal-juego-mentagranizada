@@ -3,14 +3,13 @@ import objetos.*
 import niveles.*
 import config.*
 
-//**Definir nombre**
 object karoshi {
 
 	var property position
 	var posicionInicial
-	var property ultimoInput = down
+	var property ultimoInput = "down"
 
-	method image() = "roberto/character_" + ultimoInput + ".png"
+	method image() = "Personaje/" + ultimoInput + ".png"
 
 	method revisar(nuevaPosicion, direccion) {
 		ultimoInput = direccion
@@ -27,13 +26,13 @@ object karoshi {
 
 	method reiniciarPosicion(){
         position = posicionInicial
-        ultimoInput = down
+        ultimoInput = "down"
     }
     
 	method moverA(x,y){
         position = game.at(x, y)
         posicionInicial = game.at(x, y)		
-        ultimoInput = down
+        ultimoInput = "down"
 	}
 	
     method inicializarEn(x,y){
@@ -41,7 +40,7 @@ object karoshi {
         posicionInicial = game.at(x, y)
         game.addVisual(self)
     }
-	// LO HAGO CON IF DEPSUES VEMOS COMO ARREGLARLO.
+
 	method accion() {
 		cajas.lista().forEach{ unaCaja =>
 			if (unaCaja.position() == self.posicionAdelante(ultimoInput)) {
@@ -50,47 +49,29 @@ object karoshi {
 		}
 	}
 
-	// REVISAR PARA MEJORAR ESTE METOD0
 	// LO QUE HACE ES VER QUE HAY HACIA DONDE ESTA MIRANDO
 	method posicionAdelante(direccion) {
-		if (direccion == down) {
+		if (direccion == "down") {
 			return self.position().down(1)
-		} else if (direccion == up) {
+		} else if (direccion == "up") {
 			return self.position().up(1)
-		} else if (direccion == left) {
+		} else if (direccion == "left") {
 			return self.position().left(1)
 		} else {
 			return self.position().right(1)
 		}
-	// Es esto o crear un AUX y retornar un aux
 	}
 
 	method posicionAdelante2(direccion) {
-		if (direccion == down) {
+		if (direccion == "down") {
 			return self.position().down(2)
-		} else if (direccion == up) {
+		} else if (direccion == "up") {
 			return self.position().up(2)
-		} else if (direccion == left) {
+		} else if (direccion == "left") {
 			return self.position().left(2)
 		} else {
 			return self.position().right(2)
 		}
 	}
 	
-}
-
-object right {
-
-}
-
-object left {
-
-}
-
-object up {
-
-}
-
-object down {
-
 }
