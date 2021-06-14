@@ -42,3 +42,25 @@ COSAS PARA MEJORAR VISUALMENTE
 -Armar el inicio
 -Poner un puntaje o algo que rellene arriba o ver de que tamaño lo hacemos
 -No se me ocurre mas nada.
+
+<details>
+  <summary>Respuesta tutorial</summary>
+  
+de verdad querias la respuesta de esto?
+  
+</details>
+
+<details>
+  <summary>Respuesta nivel 1</summary>
+  
+subir imagen
+  
+</details>
+
+<details>
+  <summary>Respuesta nivel 2</summary>
+  
+subir imagen
+  
+</details>
+
