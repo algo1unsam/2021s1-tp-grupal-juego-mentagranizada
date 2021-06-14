@@ -1,7 +1,7 @@
 import wollok.game.*
 import config.*
 import objetos.*
-import karoshi.*
+import pepe.*
 import menuYExtras.*
 
 class Nivel {
@@ -32,8 +32,9 @@ object configNivel {
 	}
 
 	method reiniciar() {
+		sonido.reproducir("nivel_reinicio")
 		cajas.reiniciarPosicion()
-		karoshi.reiniciarPosicion()
+		pepe.reiniciarPosicion()
 	}
 
 }
@@ -46,7 +47,7 @@ object tutorial inherits Nivel(siguienteNivel = nivel1) {
 		cajas.crear(5, 2)
 		metas.crear(8, 2)
 		todosLosElementos.cargar()
-		karoshi.inicializarEn(2, 2)
+		pepe.inicializarEn(2, 2)
 	}
 
 }
@@ -65,7 +66,7 @@ object nivel1 inherits Nivel(siguienteNivel = nivel2) {
 		metas.crear(3, 5)
 		metas.crear(7, 3)
 		metas.crear(7, 5)
-		karoshi.moverA(4, 5)
+		pepe.moverA(4, 5)
 		todosLosElementos.cargar()
 	}
 
@@ -85,7 +86,7 @@ object nivel2 inherits Nivel(siguienteNivel = nivel3) {
 		metas.crear(6, 2)
 		metas.crear(6, 5)
 		metas.crear(4, 5)
-		karoshi.moverA(5, 6)
+		pepe.moverA(5, 6)
 		todosLosElementos.cargar()
 	}
 
@@ -113,18 +114,18 @@ object nivel3 inherits Nivel(siguienteNivel = fin) {
 		metas.crear(8, 6)
 		metas.crear(7, 6)
 		metas.crear(8, 5)
-		karoshi.moverA(5, 3)
+		pepe.moverA(5, 3)
 		todosLosElementos.cargar()
 	}
 
 }
 
 object fin inherits Nivel {
-
+	
 	override method cargarObjetos() {
-		final.ejecutar()
-		game.schedule(4000, { game.stop()})
+		game.schedule(200, {=> final.ejecutar()})
+		sonido.reproducir("final_sonido")
+		game.schedule(3000, { game.stop()})
 	}
 
 }
-

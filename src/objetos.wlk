@@ -1,5 +1,6 @@
 import wollok.game.*
 import config.*
+import menuYExtras.*
 
 const pared = "Bloques/pared_bloque.png"
 
@@ -42,6 +43,7 @@ class Caja inherits Elementos {
 
 	method mover(unaDireccion) {
 		position = unaDireccion
+		sonido.reproducir("caja_mover")
 		config.ganar()
 		return null
 	}
@@ -135,4 +137,3 @@ object colisionables {
 	}
 
 }
-

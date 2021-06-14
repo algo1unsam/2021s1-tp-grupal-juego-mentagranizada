@@ -3,7 +3,7 @@ import objetos.*
 import niveles.*
 import config.*
 
-object karoshi {
+object pepe {
 
 	var property position
 	var posicionInicial

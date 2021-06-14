@@ -7,9 +7,10 @@ program juego {
 	game.width(config.ancho())
 	game.height(config.alto())
 	game.cellSize(64)
-	game.title("Tito el MueveCajas")
+	game.title("Pepe el MueveCajas")
 	game.boardGround("Bloques/piso_bloque.png")
 	config.configurarTeclas()
 	menu.ejecutar()
 	game.start()
+	
 }

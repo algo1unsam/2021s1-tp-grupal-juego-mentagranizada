@@ -22,11 +22,17 @@ object instrucciones inherits Extra(position = game.at(0, 5)) {
 }
 
 object menu inherits Extra {
-
+	const musica = sonido.sonido("menu_musica")
+	override method ejecutar(){
+		game.schedule(1, {=>musica.play()})	
+		musica.shouldLoop(true)	
+		super()
+	}
 	method empezarJuego() {
 		if (configNivel.siguienteNivel() == self) {
 			configNivel.siguienteNivel(tutorial)
 			configNivel.cambiarDeNivel()
+			musica.stop()
 			return null
 		}
 		return null
@@ -53,3 +59,13 @@ object todosLosExtras {
 
 }
 
+object sonido{
+	method sonido(audio) = game.sound("Sonidos/"+audio+".mp3")
+	method reproducir(audio){
+		self.sonido(audio).play()
+	}
+	method parar(audio) {
+		self.sonido(audio).stop()
+	}
+
+}
