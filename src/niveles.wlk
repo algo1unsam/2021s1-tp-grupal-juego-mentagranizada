@@ -92,7 +92,7 @@ object nivel2 inherits Nivel(siguienteNivel = nivel3) {
 
 }
 
-object nivel3 inherits Nivel(siguienteNivel = fin) {
+object nivel3 inherits Nivel(siguienteNivel = nivel4) {
 
 	override method cargarObjetos() {
 		paredes.crearBordes(9, 7, 1, 1)
@@ -115,6 +115,36 @@ object nivel3 inherits Nivel(siguienteNivel = fin) {
 		metas.crear(7, 6)
 		metas.crear(8, 5)
 		pepe.moverA(5, 3)
+		todosLosElementos.cargar()
+	}
+
+}
+
+object nivel4 inherits Nivel(siguienteNivel = fin) {
+
+	override method cargarObjetos() {
+		paredes.crearBordes(7, 8, 2, 0)
+		paredes.crear(5, 1)
+		paredes.crear(5, 5)
+		cajas.crear(4, 2)
+		cajas.crear(4, 4)
+		cajas.crear(5, 2)
+		cajas.crear(5, 3)
+		cajas.crear(5, 4)
+		cajas.crear(5, 6)
+		cajas.crear(6, 2)
+		cajas.crear(6, 4)	
+			
+		metas.crear(3, 5)
+		metas.crear(3, 6)
+		metas.crear(4, 5)
+		metas.crear(4, 6)
+
+		metas.crear(6, 5)
+		metas.crear(6, 6)		
+		metas.crear(7, 5)
+		metas.crear(7, 6)
+		pepe.moverA(6, 1)
 		todosLosElementos.cargar()
 	}
 
