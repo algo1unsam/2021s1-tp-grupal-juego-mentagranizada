@@ -39,6 +39,8 @@ De verdad querés la respuesta de esto?
 <details>
   <summary>Respuesta nivel 2</summary>
   
+  ![solucion-2](https://user-images.githubusercontent.com/49133201/122067992-66fee200-cdca-11eb-885a-71bde8e8b0e9.gif)
+  
 subir imagen
   
 </details>
@@ -53,6 +55,6 @@ subir imagen
 <details>
   <summary>Respuesta nivel 4</summary>
   
-subir imagen
+![solucion-4](https://user-images.githubusercontent.com/49133201/122067972-6403f180-cdca-11eb-97fc-19d19530f2dc.gif)
   
 </details>
