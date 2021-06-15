@@ -3,13 +3,15 @@ import config.*
 import objetos.*
 import pepe.*
 import menuYExtras.*
+import pistas.*
 
 class Nivel {
-
+	const property pista
 	const property siguienteNivel
 
 	method ejecutar() {
 		self.cargarObjetos()
+		configNivel.nivelActual(self)
 		configNivel.siguienteNivel(self.siguienteNivel())
 	}
 
@@ -35,6 +37,11 @@ object configNivel {
 		sonido.reproducir("nivel_reinicio")
 		cajas.reiniciarPosicion()
 		pepe.reiniciarPosicion()
+		config.sumarReintento()
+		if (config.estaDesesperado()){
+			game.say(cartel,"psss con la J ves una pista")
+			config.reintentos(0)
+		}
 	}
 
 }
@@ -52,7 +59,7 @@ object tutorial inherits Nivel(siguienteNivel = nivel1) {
 
 }
 
-object nivel1 inherits Nivel(siguienteNivel = nivel2) {
+object nivel1 inherits Nivel(siguienteNivel = nivel2, pista = nivel1_pista) {
 
 	override method cargarObjetos() {
 		paredes.crearBordes(7, 5, 2, 2)
@@ -72,7 +79,7 @@ object nivel1 inherits Nivel(siguienteNivel = nivel2) {
 
 }
 
-object nivel2 inherits Nivel(siguienteNivel = nivel3) {
+object nivel2 inherits Nivel(siguienteNivel = nivel3, pista = nivel2_pista) {
 
 	override method cargarObjetos() {
 		paredes.crearBordes(7, 7, 2, 1)
@@ -92,7 +99,7 @@ object nivel2 inherits Nivel(siguienteNivel = nivel3) {
 
 }
 
-object nivel3 inherits Nivel(siguienteNivel = nivel4) {
+object nivel3 inherits Nivel(siguienteNivel = nivel4, pista = nivel3_pista) {
 
 	override method cargarObjetos() {
 		paredes.crearBordes(9, 7, 1, 1)
@@ -120,7 +127,7 @@ object nivel3 inherits Nivel(siguienteNivel = nivel4) {
 
 }
 
-object nivel4 inherits Nivel(siguienteNivel = fin) {
+object nivel4 inherits Nivel(siguienteNivel = fin, pista = nivel4_pista) {
 
 	override method cargarObjetos() {
 		paredes.crearBordes(7, 8, 2, 0)

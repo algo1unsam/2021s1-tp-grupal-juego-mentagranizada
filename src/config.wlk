@@ -5,10 +5,11 @@ import niveles.*
 import menuYExtras.*
 
 object config {
-
+	const property volumen = 0.6
 	const tiempo = 900
 	const property alto = 9
 	const property ancho = 11
+	var property reintentos = 0
 		
 	method configurarTeclas() {
 		keyboard.right().onPressDo{ pepe.revisar(pepe.position().right(1), "right")}
@@ -18,11 +19,12 @@ object config {
 		keyboard.space().onPressDo{ pepe.accion()}
 		keyboard.r().onPressDo{ configNivel.reiniciar()}
 		keyboard.enter().onPressDo{ menu.empezarJuego()}
+		keyboard.j().onPressDo{self.mostrarSolucion(configNivel.nivelActual()) }
 	}
 
 	method ganar() {
 		if (metas.cajasEnSuLugar()) {
-			if(configNivel.siguienteNivel() == fin){
+			if(configNivel.siguienteNivel().toString() == fin.toString()){
 				fin.ejecutar()
 			}
 			else{
@@ -34,6 +36,16 @@ object config {
 				
 		
 		return null
+	}
+
+	method sumarReintento(){
+		reintentos +=1
+	}
+	
+	method estaDesesperado() = reintentos > 3
+	method mostrarSolucion(unNivel){
+		game.addVisual(unNivel.pista())
+		game.schedule(3000, { game.removeVisual(unNivel.pista())})
 	}
 
 	method cajasEnSuLugar() = metas.lista().all{ unaMeta => unaMeta.cajaEnSitio() }

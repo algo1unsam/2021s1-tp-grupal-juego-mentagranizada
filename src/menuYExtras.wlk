@@ -1,6 +1,7 @@
 import wollok.game.*
 import niveles.*
 import config.*
+import objetos.*
 
 class Extra {
 
@@ -23,9 +24,12 @@ object instrucciones inherits Extra(position = game.at(0, 5)) {
 
 object menu inherits Extra {
 	const musica = sonido.sonido("menu_musica")
+	
 	override method ejecutar(){
+		musica.volume(config.volumen())
 		game.schedule(1, {=>musica.play()})	
-		musica.shouldLoop(true)	
+		musica.shouldLoop(true)
+		game.addVisual(cartel)
 		super()
 	}
 	method empezarJuego() {

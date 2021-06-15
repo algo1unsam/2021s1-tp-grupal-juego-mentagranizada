@@ -137,3 +137,7 @@ object colisionables {
 	}
 
 }
+
+object cartel inherits Elementos(position = game.at(0,-1)){
+	method image()="extras/vacio.png"
+}
