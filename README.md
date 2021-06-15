@@ -16,7 +16,7 @@ Resolver los 4 niveles de puzzles moviendo todas las cajas a los lugares indicad
 + Flechas -> Moverse
 + Barra espaciadora -> Mover caja de adelante
 + R -> Reiniciar nivel
-+ Tecla misteriosa -> (no implementada aún)
++ Tecla misteriosa -> ???
 
 ### Soluciones
 
