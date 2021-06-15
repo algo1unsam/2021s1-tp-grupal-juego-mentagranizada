@@ -153,7 +153,7 @@ object nivel4 inherits Nivel(siguienteNivel = fin) {
 object fin inherits Nivel {
 	
 	override method cargarObjetos() {
-		game.schedule(300, {=> final.ejecutar()})
+		game.schedule(200, {=> final.ejecutar()})
 		sonido.reproducir("final_sonido")
 		game.schedule(3000, { game.stop()})
 	}
