@@ -1,5 +1,6 @@
 # PEPE EL MUEVECAJAS
 
+![bienvenides](https://user-images.githubusercontent.com/49133201/122060461-fead0200-cdc3-11eb-9ff8-4f087efb7674.png)
 
 ## Descripción del juego
 
@@ -7,7 +8,7 @@ Pepe consiguió un nuevo trabajo en el supermercado TOCO, y en su primer día de
 
 ### Objetivo
 
-Resolver los puzzles moviendo todas las cajas a los lugares indicados y superar los 4 niveles.
+Resolver los 4 niveles de puzzles moviendo todas las cajas a los lugares indicados. Recordá que las cajas son muy pesadas y Pepe no puede mover más de una a la vez.
 
 ### Teclas y controles
 
@@ -15,7 +16,7 @@ Resolver los puzzles moviendo todas las cajas a los lugares indicados y superar 
 + Flechas -> Moverse
 + Barra espaciadora -> Mover caja de adelante
 + R -> Reiniciar nivel
-+ Tecla misteriosa -> ???
++ Tecla misteriosa -> (no implementada aún)
 
 ### Soluciones
 
