@@ -40,16 +40,15 @@ De verdad querés la respuesta de esto?
   <summary>Respuesta nivel 2</summary>
   
   ![solucion-2](https://user-images.githubusercontent.com/49133201/122067992-66fee200-cdca-11eb-885a-71bde8e8b0e9.gif)
-  
-subir imagen
+
   
 </details>
 
 <details>
   <summary>Respuesta nivel 3</summary>
   
-subir imagen
-  
+![walkthrough3](https://user-images.githubusercontent.com/48897321/122069060-46835780-cdcb-11eb-8ed8-6d6c71e22577.gif)
+
 </details>
 
 <details>
