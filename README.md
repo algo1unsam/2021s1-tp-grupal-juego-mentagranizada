@@ -32,8 +32,8 @@ De verdad querés la respuesta de esto?
 <details>
   <summary>Respuesta nivel 1</summary>
   
-subir imagen
-  
+![walkthrough1](https://user-images.githubusercontent.com/48897321/122064423-89dbc700-cdc7-11eb-9787-7c6bb19a95e2.gif)
+
 </details>
 
 <details>
