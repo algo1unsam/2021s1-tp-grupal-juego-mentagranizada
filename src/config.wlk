@@ -12,11 +12,11 @@ object config {
 	var property reintentos = 0
 		
 	method configurarTeclas() {
-		keyboard.right().onPressDo{ pepe.revisar(pepe.position().right(1), "right")}
-		keyboard.left().onPressDo{ pepe.revisar(pepe.position().left(1), "left")}
-		keyboard.up().onPressDo{ pepe.revisar(pepe.position().up(1), "up")}
-		keyboard.down().onPressDo{ pepe.revisar(pepe.position().down(1), "down")}
-		keyboard.space().onPressDo{ pepe.accion()}
+		keyboard.right().onPressDo{ pepe.guardarDireccion(right) }
+		keyboard.left().onPressDo{ pepe.guardarDireccion(left) }
+		keyboard.up().onPressDo{ pepe.guardarDireccion(up) }
+		keyboard.down().onPressDo{ pepe.guardarDireccion(down) }
+		keyboard.space().onPressDo{ pepe.accion() }
 		keyboard.r().onPressDo{ configNivel.reiniciar()}
 		keyboard.enter().onPressDo{ menu.empezarJuego()}
 		keyboard.j().onPressDo{self.mostrarSolucion(configNivel.nivelActual()) }
@@ -37,7 +37,16 @@ object config {
 		
 		return null
 	}
-
+	
+	method moverSiNoColisiona(unObjeto, nuevaPosicion) {
+		if (colisionables.lista().any{ unColisionable => unColisionable.position() == nuevaPosicion }) {
+		// Si hay algo con lo que colisiona, no hace nada.
+		}
+		else {
+			unObjeto.mover(nuevaPosicion)
+		}
+	}
+	
 	method sumarReintento(){
 		reintentos +=1
 	}
@@ -50,4 +59,32 @@ object config {
 
 	method cajasEnSuLugar() = metas.lista().all{ unaMeta => unaMeta.cajaEnSitio() }
 
+}
+
+object up {
+	
+	method posicionSiguiente(unObjeto){
+		return unObjeto.position().up(1)
+	}
+}
+
+object left {
+	
+	method posicionSiguiente(unObjeto){
+		return unObjeto.position().left(1)
+	}
+}
+
+object down {
+	
+	method posicionSiguiente(unObjeto){
+		return unObjeto.position().down(1)
+	}
+}
+
+object right {
+	
+	method posicionSiguiente(unObjeto){
+		return unObjeto.position().right(1)
+	}
 }

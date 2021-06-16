@@ -34,18 +34,14 @@ class Caja inherits Elementos {
 
 	method image() = caja
 
-	method revisar(direccion) {
-		if (colisionables.lista().any{ unObjeto => unObjeto.position() == direccion }) {
-		} else {
-			self.mover(direccion)
-		}
+	method verSiPuedeMoverse(unaDireccion){
+		config.moverSiNoColisiona(self, unaDireccion.posicionSiguiente(self))
 	}
 
 	method mover(unaDireccion) {
 		position = unaDireccion
 		sonido.reproducir("caja_mover")
 		config.ganar()
-		return null
 	}
 
 	method reiniciarPosicion() {
@@ -136,6 +132,19 @@ object colisionables {
 		lista = [ paredes.lista(), cajas.lista() ].flatten()
 	}
 
+}
+
+
+object vacio {						//Objeto para el metodo accion de Pepe
+	const position = game.origin()
+	
+	method position() {
+		return position
+	}
+	
+	method verSiPuedeMoverse(unaDireccion) {
+	}
+	
 }
 
 object cartel inherits Elementos(position = game.at(0,-1)){

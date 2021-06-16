@@ -7,17 +7,14 @@ object pepe {
 
 	var property position
 	var posicionInicial
-	var property ultimoInput = "down"
+	var property ultimoInput = down
+	var property nivelActual = nivel1
 
-	method image() = "Personaje/" + ultimoInput + ".png"
+	method image() = "Personaje/" + ultimoInput.toString() + ".png"
 
-	method revisar(nuevaPosicion, direccion) {
-		ultimoInput = direccion
-		if (colisionables.lista().any{ unObjeto => unObjeto.position() == nuevaPosicion }) {
-		// Si hay algo con lo que colisiona, no hace nada.
-		} else {
-			self.mover(nuevaPosicion)
-		}
+	method guardarDireccion(unaDireccion) {
+		ultimoInput = unaDireccion
+		config.moverSiNoColisiona(self, unaDireccion.posicionSiguiente(self))
 	}
 
 	method mover(nuevaPosicion) {
@@ -26,52 +23,29 @@ object pepe {
 
 	method reiniciarPosicion(){
         position = posicionInicial
-        ultimoInput = "down"
+        ultimoInput = down
     }
     
-	method moverA(x,y){
+	method iniciarEn(x,y){
         position = game.at(x, y)
         posicionInicial = game.at(x, y)		
-        ultimoInput = "down"
+        ultimoInput = down
 	}
-	
-    method inicializarEn(x,y){
-        position = game.at(x, y)
-        posicionInicial = game.at(x, y)
-        game.addVisual(self)
-    }
+
+	method hayUnaCajaAdelante() {
+		return cajas.lista().findOrDefault({ unaCaja => unaCaja.position() == ultimoInput.posicionSiguiente(self) }, vacio)
+	}
 
 	method accion() {
-		cajas.lista().forEach{ unaCaja =>
-			if (unaCaja.position() == self.posicionAdelante(ultimoInput)) {
-				unaCaja.revisar(self.posicionAdelante2(ultimoInput))
-			}
-		}
+		self.hayUnaCajaAdelante().verSiPuedeMoverse(ultimoInput) 
 	}
-
-	// LO QUE HACE ES VER QUE HAY HACIA DONDE ESTA MIRANDO
-	method posicionAdelante(direccion) {
-		if (direccion == "down") {
-			return self.position().down(1)
-		} else if (direccion == "up") {
-			return self.position().up(1)
-		} else if (direccion == "left") {
-			return self.position().left(1)
-		} else {
-			return self.position().right(1)
+	
+	method estaDesesperado() {
+		return config.reintentos() > 3
 		}
-	}
-
-	method posicionAdelante2(direccion) {
-		if (direccion == "down") {
-			return self.position().down(2)
-		} else if (direccion == "up") {
-			return self.position().up(2)
-		} else if (direccion == "left") {
-			return self.position().left(2)
-		} else {
-			return self.position().right(2)
-		}
+	
+	method nivelActual(unNivel) {
+		nivelActual = unNivel
 	}
 	
 }

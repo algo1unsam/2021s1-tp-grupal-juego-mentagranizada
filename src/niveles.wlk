@@ -54,7 +54,8 @@ object tutorial inherits Nivel(siguienteNivel = nivel1) {
 		cajas.crear(5, 2)
 		metas.crear(8, 2)
 		todosLosElementos.cargar()
-		pepe.inicializarEn(2, 2)
+		game.addVisual(pepe)
+		pepe.iniciarEn(2, 2)
 	}
 
 }
@@ -73,7 +74,7 @@ object nivel1 inherits Nivel(siguienteNivel = nivel2, pista = nivel1_pista) {
 		metas.crear(3, 5)
 		metas.crear(7, 3)
 		metas.crear(7, 5)
-		pepe.moverA(4, 5)
+		pepe.iniciarEn(4, 5)
 		todosLosElementos.cargar()
 	}
 
@@ -93,7 +94,7 @@ object nivel2 inherits Nivel(siguienteNivel = nivel3, pista = nivel2_pista) {
 		metas.crear(6, 2)
 		metas.crear(6, 5)
 		metas.crear(4, 5)
-		pepe.moverA(5, 6)
+		pepe.iniciarEn(5, 6)
 		todosLosElementos.cargar()
 	}
 
@@ -121,7 +122,7 @@ object nivel3 inherits Nivel(siguienteNivel = nivel4, pista = nivel3_pista) {
 		metas.crear(8, 6)
 		metas.crear(7, 6)
 		metas.crear(8, 5)
-		pepe.moverA(5, 3)
+		pepe.iniciarEn(5, 3)
 		todosLosElementos.cargar()
 	}
 
@@ -151,7 +152,7 @@ object nivel4 inherits Nivel(siguienteNivel = fin, pista = nivel4_pista) {
 		metas.crear(6, 6)		
 		metas.crear(7, 5)
 		metas.crear(7, 6)
-		pepe.moverA(6, 1)
+		pepe.iniciarEn(6, 1)
 		todosLosElementos.cargar()
 	}
 
