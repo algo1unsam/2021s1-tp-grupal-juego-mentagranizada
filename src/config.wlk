@@ -17,48 +17,34 @@ object config {
 		keyboard.up().onPressDo{ pepe.guardarDireccion(up) }
 		keyboard.down().onPressDo{ pepe.guardarDireccion(down) }
 		keyboard.space().onPressDo{ pepe.accion() }
-		keyboard.r().onPressDo{ configNivel.reiniciar()}
+		keyboard.r().onPressDo{ pepe.nivelActual().reiniciar()}
 		keyboard.enter().onPressDo{ menu.empezarJuego()}
-		keyboard.j().onPressDo{self.mostrarSolucion(configNivel.nivelActual()) }
+//		keyboard.j().onPressDo{game.say(cartel, nivel1.pista().toString()) }
+		keyboard.j().onPressDo{pepe.nivelActual().mostrarSolucion() }
 	}
 
 	method ganar() {
 		if (metas.cajasEnSuLugar()) {
-			if(configNivel.siguienteNivel().toString() == fin.toString()){
+			if(pepe.nivelActual().siguienteNivel().toString() == fin.toString()){
 				fin.ejecutar()
 			}
 			else{
 				game.schedule(200, {=> sonido.reproducir("nivel_ganar")})
-				game.schedule(tiempo, {=> configNivel.cambiarDeNivel()})
+				game.schedule(tiempo, {=> pepe.nivelActual().avanzarA(pepe.nivelActual().siguienteNivel())})
 			}
 			
-		}
-				
-		
-		return null
+			}
 	}
 	
-	method moverSiNoColisiona(unObjeto, nuevaPosicion) {
-		if (colisionables.lista().any{ unColisionable => unColisionable.position() == nuevaPosicion }) {
-		// Si hay algo con lo que colisiona, no hace nada.
-		}
-		else {
-			unObjeto.mover(nuevaPosicion)
-		}
+	method revisarColision(unObjeto, nuevaPosicion) {
+		return colisionables.lista().any{ unColisionable => unColisionable.position() == nuevaPosicion }
 	}
 	
 	method sumarReintento(){
 		reintentos +=1
 	}
 	
-	method estaDesesperado() = reintentos > 3
-	method mostrarSolucion(unNivel){
-		game.addVisual(unNivel.pista())
-		game.schedule(3000, { game.removeVisual(unNivel.pista())})
-	}
-
 	method cajasEnSuLugar() = metas.lista().all{ unaMeta => unaMeta.cajaEnSitio() }
-
 }
 
 object up {

@@ -8,38 +8,35 @@ const caja = "Bloques/caja_bloque.png"
 
 const meta = "Bloques/meta_bloque.png"
 
-class Elementos {
 
+class Pared {
 	var property position
-
-}
-
-class Pared inherits Elementos {
-
 	method image() = pared
 
 }
 
-class Meta inherits Elementos {
-
+class Meta {
+	var property position
 	method image() = meta
 
 	method cajaEnSitio() = cajas.lista().any{ unaCaja => unaCaja.position() == self.position() }
 
 }
 
-class Caja inherits Elementos {
-
+class Caja {
+	var property position
 	const posicionInicial
 
 	method image() = caja
 
-	method verSiPuedeMoverse(unaDireccion){
-		config.moverSiNoColisiona(self, unaDireccion.posicionSiguiente(self))
+	method puedeMoverse(unaDireccion) {
+		if (not config.revisarColision(self, unaDireccion.posicionSiguiente(self))){
+			self.mover(unaDireccion)
+		}
 	}
 
 	method mover(unaDireccion) {
-		position = unaDireccion
+		self.position(unaDireccion.posicionSiguiente(self))
 		sonido.reproducir("caja_mover")
 		config.ganar()
 	}
@@ -50,8 +47,8 @@ class Caja inherits Elementos {
 
 }
 
-object paredes inherits ConfigElementos {
-
+object paredes {
+	const property lista = []
 	// Este metodo crea cada objeto PARED con su respectiva posicion para luego
 	// poder usar ADDVISUAL y generar las paredes automaticamente con el alto y ancho dado en config.
 	method crearBordes(ancho, alto, origenX, origenY) {
@@ -69,23 +66,8 @@ object paredes inherits ConfigElementos {
 
 }
 
-class ConfigElementos {
-
+object cajas {
 	const property lista = []
-
-	method cargar() {
-		lista.forEach{ unElemento => game.addVisual(unElemento)}
-	}
-
-	method eliminar() {
-		lista.forEach{ unElemento => game.removeVisual(unElemento)}
-		lista.forEach{ unElemento => lista.remove(unElemento)}
-	}
-
-}
-
-object cajas inherits ConfigElementos {
-
 	method crear(x, y) {
 		lista.add(new Caja(position = game.at(x, y), posicionInicial = game.at(x, y)))
 	}
@@ -93,43 +75,36 @@ object cajas inherits ConfigElementos {
 	method reiniciarPosicion() {
 		lista.forEach({ unaCaja => unaCaja.reiniciarPosicion()})
 	}
-
 }
 
-object metas inherits ConfigElementos {
-
+object metas {
+	const property lista = []
 	method crear(x, y) {
 		lista.add(new Meta(position = game.at(x, y)))
 	}
 
 	method cajasEnSuLugar() = lista.all{ unaMeta => unaMeta.cajaEnSitio() }
-
 }
 
 object todosLosElementos {
+	
+	method lista() = [ paredes.lista(), cajas.lista(), metas.lista() ].flatten()
 
-	method cargar() {
-		paredes.cargar()
-		cajas.cargar()
-		metas.cargar()
+	method cargar(elementos) {
+		elementos.lista().forEach{ unElemento => game.addVisual(unElemento)}
 	}
 
-	method eliminar() {
-		cajas.eliminar()
-		paredes.eliminar()
-		metas.eliminar()
+	method eliminar(elementos) {
+		elementos.lista().forEach{ unElemento => game.removeVisual(unElemento)}
+		elementos.lista().forEach{ unElemento => elementos.lista().remove(unElemento)}
 	}
 
 }
 
 object colisionables {
 
-	var lista = []
-
-	method lista() = lista
-
-	method actualizar() {
-		lista = [ paredes.lista(), cajas.lista() ].flatten()
+	method lista() {
+		return [ paredes.lista(), cajas.lista() ].flatten()
 	}
 
 }
@@ -143,10 +118,10 @@ object vacio {						//Objeto para el metodo accion de Pepe
 	}
 	
 	method verSiPuedeMoverse(unaDireccion) {
-	}
-	
+	}	
 }
 
-object cartel inherits Elementos(position = game.at(0,-1)){
+object cartel {
+	var property position = game.at(0, -1)
 	method image()="extras/vacio.png"
 }

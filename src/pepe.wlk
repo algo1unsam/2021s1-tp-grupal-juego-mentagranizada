@@ -2,23 +2,30 @@ import wollok.game.*
 import objetos.*
 import niveles.*
 import config.*
+import menuYExtras.*
 
 object pepe {
 
-	var property position
+	var property position = game.origin()
 	var posicionInicial
 	var property ultimoInput = down
-	var property nivelActual = nivel1
+	var property nivelActual = menu
 
 	method image() = "Personaje/" + ultimoInput.toString() + ".png"
 
 	method guardarDireccion(unaDireccion) {
 		ultimoInput = unaDireccion
-		config.moverSiNoColisiona(self, unaDireccion.posicionSiguiente(self))
+		self.puedeMoverse(unaDireccion)
+	}
+	
+	method puedeMoverse(unaDireccion) {
+		if (not config.revisarColision(self, unaDireccion.posicionSiguiente(self))){
+			self.mover(unaDireccion)
+		}
 	}
 
-	method mover(nuevaPosicion) {
-		self.position(nuevaPosicion)
+	method mover(unaDireccion) {
+		self.position(unaDireccion.posicionSiguiente(self))
 	}
 
 	method reiniciarPosicion(){
@@ -33,11 +40,11 @@ object pepe {
 	}
 
 	method hayUnaCajaAdelante() {
-		return cajas.lista().findOrDefault({ unaCaja => unaCaja.position() == ultimoInput.posicionSiguiente(self) }, vacio)
+		return cajas.lista().filter({ unaCaja => unaCaja.position() == ultimoInput.posicionSiguiente(self) })
 	}
 
 	method accion() {
-		self.hayUnaCajaAdelante().verSiPuedeMoverse(ultimoInput) 
+		self.hayUnaCajaAdelante().forEach({ unaCaja => unaCaja.puedeMoverse(ultimoInput) })
 	}
 	
 	method estaDesesperado() {

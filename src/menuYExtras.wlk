@@ -1,69 +1,24 @@
 import wollok.game.*
 import niveles.*
 import config.*
-import objetos.*
+import pepe.*
 
-class Extra {
-
-	const position = game.origin()
-
-	method image() = "Extras/" + self + ".png"
-
-	method position() = position
-
-	method ejecutar() {
-		game.addVisual(self)
-		todosLosExtras.agregar(self)
-	}
-
-}
-
-object instrucciones inherits Extra(position = game.at(0, 5)) {
-
-}
-
-object menu inherits Extra {
-	const musica = sonido.sonido("menu_musica")
+object instrucciones {
 	
-	override method ejecutar(){
-		musica.volume(config.volumen())
-		game.schedule(1, {=>musica.play()})	
-		musica.shouldLoop(true)
-		game.addVisual(cartel)
-		super()
+	method image() = "Extras/" + self.toString() + ".png"
+	
+	method position() = game.at(0, 5)
+	
+	method mostrar() {
+		game.addVisual(self)
 	}
-	method empezarJuego() {
-		if (configNivel.siguienteNivel() == self) {
-			configNivel.siguienteNivel(tutorial)
-			configNivel.cambiarDeNivel()
-			musica.stop()
-			return null
-		}
-		return null
+	
+	method ocultar() {
+		game.removeVisual(self)		
 	}
-
 }
 
-object final inherits Extra {
-
-}
-
-object todosLosExtras {
-
-	const lista = []
-
-	method agregar(visual) {
-		lista.add(visual)
-	}
-
-	method limpiar() {
-		lista.forEach({ unExtra => game.removeVisual(unExtra)})
-		lista.clear()
-	}
-
-}
-
-object sonido{
+object sonido {
 	method sonido(audio) = game.sound("Sonidos/"+audio+".mp3")
 	method reproducir(audio){
 		self.sonido(audio).play()
@@ -72,4 +27,27 @@ object sonido{
 		self.sonido(audio).stop()
 	}
 
+}
+
+
+class Pista{
+	method position() = game.origin()
+	method image() = "Pistas/" + self.toString() + ".png"
+}
+
+object tutorial_pista inherits Pista{
+
+}
+
+object nivel1_pista inherits Pista{
+
+}
+object nivel2_pista inherits Pista{
+	
+}
+object nivel3_pista inherits Pista{
+	
+}
+object nivel4_pista inherits Pista{
+	
 }
