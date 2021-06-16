@@ -12,5 +12,7 @@ program juego {
 	config.configurarTeclas()
 	menu.ejecutar()
 	game.start()
-	
-} 
+}
+//COSAS POR HACER
+//ver si hay una forma de simplificar la carga de los objetos por nivel
+//ver si se puede optimizar aun mas el movimiento   

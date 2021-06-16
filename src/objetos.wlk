@@ -1,6 +1,7 @@
 import wollok.game.*
 import config.*
 import menuYExtras.*
+import pepe.*
 
 const pared = "Bloques/pared_bloque.png"
 
@@ -8,29 +9,33 @@ const caja = "Bloques/caja_bloque.png"
 
 const meta = "Bloques/meta_bloque.png"
 
-
 class Pared {
+
 	var property position
+
 	method image() = pared
 
 }
 
 class Meta {
+
 	var property position
+
 	method image() = meta
 
-	method cajaEnSitio() = cajas.lista().any{ unaCaja => unaCaja.position() == self.position() }
+	method cajaEnMeta() = cajas.lista().any{ unaCaja => unaCaja.position() == self.position() }
 
 }
 
 class Caja {
+
 	var property position
 	const posicionInicial
 
 	method image() = caja
 
 	method puedeMoverse(unaDireccion) {
-		if (not config.revisarColision(self, unaDireccion.posicionSiguiente(self))){
+		if (not config.revisarColision(self, unaDireccion.posicionSiguiente(self))) {
 			self.mover(unaDireccion)
 		}
 	}
@@ -38,7 +43,7 @@ class Caja {
 	method mover(unaDireccion) {
 		self.position(unaDireccion.posicionSiguiente(self))
 		sonido.reproducir("caja_mover")
-		config.ganar()
+		pepe.nivelActual().ganar()
 	}
 
 	method reiniciarPosicion() {
@@ -48,7 +53,9 @@ class Caja {
 }
 
 object paredes {
+
 	const property lista = []
+
 	// Este metodo crea cada objeto PARED con su respectiva posicion para luego
 	// poder usar ADDVISUAL y generar las paredes automaticamente con el alto y ancho dado en config.
 	method crearBordes(ancho, alto, origenX, origenY) {
@@ -67,7 +74,9 @@ object paredes {
 }
 
 object cajas {
+
 	const property lista = []
+
 	method crear(x, y) {
 		lista.add(new Caja(position = game.at(x, y), posicionInicial = game.at(x, y)))
 	}
@@ -75,19 +84,25 @@ object cajas {
 	method reiniciarPosicion() {
 		lista.forEach({ unaCaja => unaCaja.reiniciarPosicion()})
 	}
+
 }
 
 object metas {
+
 	const property lista = []
+
 	method crear(x, y) {
 		lista.add(new Meta(position = game.at(x, y)))
 	}
 
-	method cajasEnSuLugar() = lista.all{ unaMeta => unaMeta.cajaEnSitio() }
+	method todasLasCajasEnSuLugar() {
+		return lista.all{ unaMeta => unaMeta.cajaEnMeta() }
+	}
+
 }
 
 object todosLosElementos {
-	
+
 	method lista() = [ paredes.lista(), cajas.lista(), metas.lista() ].flatten()
 
 	method cargar(elementos) {
@@ -109,19 +124,11 @@ object colisionables {
 
 }
 
-
-object vacio {						//Objeto para el metodo accion de Pepe
-	const position = game.origin()
-	
-	method position() {
-		return position
-	}
-	
-	method verSiPuedeMoverse(unaDireccion) {
-	}	
-}
-
 object cartel {
+
 	var property position = game.at(0, -1)
-	method image()="extras/vacio.png"
+
+	method image() = "extras/vacio.png"
+
 }
+

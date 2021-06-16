@@ -17,9 +17,9 @@ object pepe {
 		ultimoInput = unaDireccion
 		self.puedeMoverse(unaDireccion)
 	}
-	
+
 	method puedeMoverse(unaDireccion) {
-		if (not config.revisarColision(self, unaDireccion.posicionSiguiente(self))){
+		if (not config.revisarColision(self, unaDireccion.posicionSiguiente(self))) {
 			self.mover(unaDireccion)
 		}
 	}
@@ -28,15 +28,15 @@ object pepe {
 		self.position(unaDireccion.posicionSiguiente(self))
 	}
 
-	method reiniciarPosicion(){
-        position = posicionInicial
-        ultimoInput = down
-    }
-    
-	method iniciarEn(x,y){
-        position = game.at(x, y)
-        posicionInicial = game.at(x, y)		
-        ultimoInput = down
+	method reiniciarPosicion() {
+		position = posicionInicial
+		ultimoInput = down
+	}
+
+	method iniciarEn(x, y) {
+		position = game.at(x, y)
+		posicionInicial = game.at(x, y)
+		ultimoInput = down
 	}
 
 	method hayUnaCajaAdelante() {
@@ -44,15 +44,16 @@ object pepe {
 	}
 
 	method accion() {
-		self.hayUnaCajaAdelante().forEach({ unaCaja => unaCaja.puedeMoverse(ultimoInput) })
+		self.hayUnaCajaAdelante().forEach({ unaCaja => unaCaja.puedeMoverse(ultimoInput)})
 	}
-	
+
 	method estaDesesperado() {
 		return config.reintentos() > 3
-		}
-	
+	}
+
 	method nivelActual(unNivel) {
 		nivelActual = unNivel
 	}
-	
+
 }
+
