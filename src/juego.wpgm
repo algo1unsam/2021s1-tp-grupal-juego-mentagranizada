@@ -1,7 +1,7 @@
 import wollok.game.*
 import config.*
 import niveles.*
-import menuYExtras.*
+import extras.*
 
 program juego {
 	game.width(config.ancho())

@@ -2,7 +2,7 @@ import wollok.game.*
 import pepe.*
 import objetos.*
 import niveles.*
-import menuYExtras.*
+import extras.*
 
 object config {
 
@@ -22,7 +22,6 @@ object config {
 		keyboard.r().onPressDo{ nivelActual.reiniciar()}
 		keyboard.enter().onPressDo{ nivelActual.empezarJuego()}
 		keyboard.j().onPressDo{ nivelActual.mostrarSolucion()}
-		keyboard.l().onPressDo{ nivelActual.eliminarElementos()}
 	}
 
 	method revisarColision(unObjeto, nuevaPosicion) {

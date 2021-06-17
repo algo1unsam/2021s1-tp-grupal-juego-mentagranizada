@@ -2,7 +2,7 @@ import wollok.game.*
 import config.*
 import objetos.*
 import pepe.*
-import menuYExtras.*
+import extras.*
 
 class Nivel {
 
@@ -107,7 +107,7 @@ object menu inherits Nivel(siguienteNivel = tutorial) {
 
 	const musica = sonido.sonido("menu_musica")
 
-	method image() = self.toString() + ".png"
+	method image() = "menu.png"
 
 	method position() = game.origin()
 
@@ -259,7 +259,7 @@ object fin inherits Nivel(siguienteNivel = null, pista = null) {
 
 	const position = game.origin()
 
-	method image() = self.toString() + ".png"
+	method image() = "fin.png"
 
 	method position() = position
 

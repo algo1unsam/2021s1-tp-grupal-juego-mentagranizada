@@ -1,6 +1,6 @@
 import wollok.game.*
 import config.*
-import menuYExtras.*
+import extras.*
 import pepe.*
 
 const pared = "pared_bloque.png"

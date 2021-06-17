@@ -2,7 +2,7 @@ import wollok.game.*
 import objetos.*
 import niveles.*
 import config.*
-import menuYExtras.*
+import extras.*
 
 object pepe {
 

@@ -5,7 +5,7 @@ import pepe.*
 
 object instrucciones {
 
-	method image() = self.toString() + ".png"
+	method image() = "instrucciones.png"
 
 	method position() = game.at(0, 5)
 
@@ -42,30 +42,31 @@ object sonido {
 }
 
 class Pista {
+	const imagen
 
 	method position() = game.origin()
 
-	method image() = self.toString() + ".png"
+	method image() = imagen
 
 }
 
-object tutorial_pista inherits Pista {
+object tutorial_pista inherits Pista(imagen = "tutorial_pista.png") {
 
 }
 
-object nivel1_pista inherits Pista {
+object nivel1_pista inherits Pista(imagen = "nivel1_pista.png") {
 
 }
 
-object nivel2_pista inherits Pista {
+object nivel2_pista inherits Pista(imagen = "nivel2_pista.png") {
 
 }
 
-object nivel3_pista inherits Pista {
+object nivel3_pista inherits Pista(imagen = "nivel3_pista.png") {
 
 }
 
-object nivel4_pista inherits Pista {
+object nivel4_pista inherits Pista(imagen = "nivel4_pista.png") {
 
 }
 
