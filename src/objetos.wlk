@@ -23,8 +23,6 @@ class Meta {
 
 	method accion(unaDireccion) {
 	}
-	//Retorna true si la posicion de una caja cualquiera coincide con la de la meta
-	method cajaEnMeta() = config.nivelActual().listaCajas().any{ unaCaja => unaCaja.position() == self.position() }
 
 }
 
@@ -35,6 +33,9 @@ class Caja {
 
 	method image() = "caja_bloque.png"
 
+	//Retorna true si la posicion de una caja cualquiera coincide con la de la meta
+	method cajaEnMeta() = config.nivelActual().listaMetas().any{ unaMeta => unaMeta.position() == self.position() }
+
 	//Pregunta si puede moverse
 	method accion(unaDireccion) {
 		self.puedeMoverse(unaDireccion)
@@ -42,10 +43,12 @@ class Caja {
 
 	//Si no colisiona con nada, se mueve
 	method puedeMoverse(unaDireccion) {
-		if (not config.revisarColision(self, unaDireccion.posicionSiguiente(self))) {
+		if (config.colisiona(self, unaDireccion)) {
+		}
+		else{
 			self.mover(unaDireccion)
 		}
-	}
+		}
 	
 	//Aparte de mover, ejecuta nivelActual.ganar, que se fija si todas las cajas estan en una meta
 	method mover(unaDireccion) {
@@ -69,7 +72,8 @@ object colisionables {
 }
 
 object vacio {
-
+	var property position = game.at(0,0)
+	
 	method accion(unaDireccion) {
 		game.say(rata, "No tenés una caja adelante!")
 	}

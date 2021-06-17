@@ -21,7 +21,9 @@ object pepe {
 
 //Pregunta si pepe colisiona, si no lo hace, se mueve
 	method puedeMoverse(unaDireccion) {
-		if (not config.revisarColision(self, unaDireccion.posicionSiguiente(self))) {
+		if (config.colisiona(self, unaDireccion)) {
+		}
+		else{
 			self.mover(unaDireccion)
 		}
 	}
@@ -44,7 +46,7 @@ object pepe {
 	}
 
 
-	method tieneUnElementoAdelante() {
+	method loQueTieneAdelante() {
 		// return config.nivelActual().elementosDelNivel().filter({ unElemento => unElemento.position() == ultimoInput.posicionSiguiente(self) })
 		return config.nivelActual().elementosDelNivel().findOrDefault({ unElemento => unElemento.position() == ultimoInput.posicionSiguiente(self) }, vacio)
 	}
@@ -56,7 +58,7 @@ object pepe {
 //Vacio: Es el objeto por default, la rata indica que Pepe no tiene nada adelante con que interactuar
 	method interactuar() {
 		// self.tieneUnElementoAdelante().forEach({unElemento => unElemento.accion(ultimoInput)})
-		self.tieneUnElementoAdelante().accion(ultimoInput)
+		self.loQueTieneAdelante().accion(ultimoInput)
 //Este metodo tenia un forEach aunque siempre reciba una lista con un solo elemento.
 //La otra forma que encontramos es usar un find en vez de filter en el metodo tieneUnElementoAdelante(), en este caso
 //creamos un objeto vacio con el metodo accion y lo pusimos como default.

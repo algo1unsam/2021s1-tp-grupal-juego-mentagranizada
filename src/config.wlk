@@ -23,8 +23,11 @@ object config {
 		keyboard.j().onPressDo{ nivelActual.mostrarSolucion()}
 	}
 
-	method revisarColision(unObjeto, nuevaPosicion) {
-		return colisionables.lista().any{ unColisionable => unColisionable.position() == nuevaPosicion }
+//	method revisarColision(unObjeto, unaDireccion) {
+//		return colisionables.lista().any{ unColisionable => unColisionable.position() == unaDireccion }
+//	}
+	method colisiona(unObjeto, unaDireccion) {
+		return colisionables.lista().any{ unColisionable => unColisionable.position() == unaDireccion.posicionSiguiente(unObjeto) }
 	}
 
 	method nivelActual(unNivel) {

@@ -78,7 +78,7 @@ class Nivel {
 	}
 	//Pregunta si en cada meta hay una caja
 	method todasLasCajasEnSuLugar() {
-		return listaMetas.all{ unaMeta => unaMeta.cajaEnMeta() }
+		return listaCajas.all{ unaCaja => unaCaja.cajaEnMeta() }
 	}
 
 //CAJAS

@@ -1,0 +1,62 @@
+import wollok.game.*
+import config.*
+import pepe.*
+import niveles.*
+import objetos.*
+import extras.*
+
+describe "Pepe el MueveCajas"{
+
+	const caja1 = new Caja(position = game.at(5,2), posicionInicial = game.at(5, 2))
+	const meta1 = new Meta(position = game.at(6,2))
+	const pared1 = new Pared(position = game.at(2,3))
+	
+fixture {
+	config.nivelActual(tutorial)
+	tutorial.listaCajas().add(caja1)
+	tutorial.listaMetas().add(meta1)
+	tutorial.listaParedes().add(pared1)
+	tutorial.cargarElementos()
+	pepe.iniciarEn(2,2)
+	game.addVisual(rata)//Agrego estos visuals para poder ejecutar tutorial.avanzarA(tutorial.siguienteNivel()) en test 4
+	game.addVisual(instrucciones)
+}
+
+test "Si Pepe se mueve hasta donde esta la caja, en vez de chocar se queda en la misma posicion" {
+
+	pepe.guardarDireccion(right)
+	pepe.guardarDireccion(right)
+	pepe.puedeMoverse(right)
+	assert.equals(game.at(4, 2), pepe.position())
+	pepe.puedeMoverse(right)
+	assert.equals(game.at(4, 2), pepe.position())
+}
+
+test "Si Pepe mira hacia arriba, no puede moverse porque hay una pared" {
+	pepe.guardarDireccion(up)
+	assert.equals(game.at(2, 2), pepe.position())
+	pepe.puedeMoverse(up)
+	assert.equals(game.at(2, 2), pepe.position())	
+}
+
+test "Si Pepe interactua con la caja, esta se mueve una posición" {
+	pepe.guardarDireccion(right)
+	pepe.guardarDireccion(right)
+	pepe.puedeMoverse(right)
+	assert.equals(game.at(4, 2), pepe.position())
+	pepe.puedeMoverse(right)
+	assert.equals(game.at(4, 2), pepe.position())	
+	assert.equals(game.at(5, 2), pepe.loQueTieneAdelante().position())	
+	assert.throwsException({pepe.interactuar()})
+	assert.equals(game.at(6, 2), caja1.position())	
+	
+}
+
+test "Si la caja llega a la meta, todas las cajas estan en su lugar, y pasa al siguiente nivel" {
+	caja1.position(game.at(6,2))
+	assert.that(tutorial.todasLasCajasEnSuLugar())
+	tutorial.avanzarA(tutorial.siguienteNivel())
+	assert.equals(nivel1, config.nivelActual())
+}
+
+}
