@@ -21,9 +21,13 @@ object instrucciones {
 
 object rata {
 
-	var property position = game.at(0, 0)
+	const position = game.at(0, 0)
 
 	method image() = "Ratita.png"
+	
+	method position() {
+		return position
+	}
 
 }
 
