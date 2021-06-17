@@ -107,7 +107,7 @@ object menu inherits Nivel(siguienteNivel = tutorial) {
 
 	const musica = sonido.sonido("menu_musica")
 
-	method image() = "Extras/" + self.toString() + ".png"
+	method image() = self.toString() + ".png"
 
 	method position() = game.origin()
 
@@ -259,7 +259,7 @@ object fin inherits Nivel(siguienteNivel = null, pista = null) {
 
 	const position = game.origin()
 
-	method image() = "Extras/" + self.toString() + ".png"
+	method image() = self.toString() + ".png"
 
 	method position() = position
 

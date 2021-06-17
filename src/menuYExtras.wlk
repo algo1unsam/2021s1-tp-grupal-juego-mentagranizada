@@ -5,7 +5,7 @@ import pepe.*
 
 object instrucciones {
 
-	method image() = "Extras/" + self.toString() + ".png"
+	method image() = self.toString() + ".png"
 
 	method position() = game.at(0, 5)
 
@@ -23,13 +23,13 @@ object rata {
 
 	var property position = game.at(0, 0)
 
-	method image() = "extras/Ratita.png"
+	method image() = "Ratita.png"
 
 }
 
 object sonido {
 
-	method sonido(audio) = game.sound("Sonidos/" + audio + ".mp3")
+	method sonido(audio) = game.sound(audio + ".mp3")
 
 	method reproducir(audio) {
 		self.sonido(audio).play()
@@ -45,7 +45,7 @@ class Pista {
 
 	method position() = game.origin()
 
-	method image() = "Pistas/" + self.toString() + ".png"
+	method image() = self.toString() + ".png"
 
 }
 

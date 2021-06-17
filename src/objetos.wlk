@@ -3,11 +3,11 @@ import config.*
 import menuYExtras.*
 import pepe.*
 
-const pared = "Bloques/pared_bloque.png"
+const pared = "pared_bloque.png"
 
-const caja = "Bloques/caja_bloque.png"
+const caja = "caja_bloque.png"
 
-const meta = "Bloques/meta_bloque.png"
+const meta = "meta_bloque.png"
 
 class Pared {
 
