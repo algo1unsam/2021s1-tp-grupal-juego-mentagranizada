@@ -3,17 +3,18 @@ import config.*
 import extras.*
 import pepe.*
 
-const pared = "pared_bloque.png"
+//const pared = "pared_bloque.png"
 
-const caja = "caja_bloque.png"
+//const caja = "caja_bloque.png"
 
-const meta = "meta_bloque.png"
+//const meta = "meta_bloque.png"
 
 class Pared {
+	
 
 	var property position
 
-	method image() = pared
+	method image() = "pared_bloque.png"
 
 	method accion(unaDireccion) {
 		game.say(rata, "No podés empujar las paredes")
@@ -25,7 +26,7 @@ class Meta {
 
 	var property position
 
-	method image() = meta
+	method image() = "meta_bloque.png"
 
 	method accion(unaDireccion) {
 	}
@@ -39,7 +40,7 @@ class Caja {
 	var property position
 	const posicionInicial
 
-	method image() = caja
+	method image() = "caja_bloque.png"
 
 	method accion(unaDireccion) {
 		self.puedeMoverse(unaDireccion)
