@@ -10,7 +10,7 @@ object pepe {
 	var posicionInicial
 	var property ultimoInput = down
 
-	method image() = ultimoInput.toString() + ".png"
+	method image() = ultimoInput + ".png"
 
 	method guardarDireccion(unaDireccion) {
 		ultimoInput = unaDireccion
