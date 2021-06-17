@@ -20,14 +20,12 @@ object instrucciones {
 }
 
 object rata {
-
-	const position = game.at(0, 0)
-
-	method image() = "Ratita.png"
 	
-	method position() {
-		return position
-	}
+	const imagen = "Ratita.png"
+
+	method position() = game.origin()
+
+	method image() = imagen
 
 }
 
