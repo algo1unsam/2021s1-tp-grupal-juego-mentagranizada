@@ -9,37 +9,40 @@ class Nivel {
 	const property pista
 	var property siguienteNivel
 	var property nivelActual = menu
+	const property listaCajas = []
+	const property listaMetas = []
+	const property listaParedes = []
 
 	method ejecutar() {
-		pepe.nivelActual(self)
+		config.nivelActual(self)
 		self.siguienteNivel(siguienteNivel)
-		self.cargarObjetos()
+		self.cargarTodo()
+		game.addVisual(rata)
 	}
 
-	method cargarObjetos() {
+	method cargarTodo() {
 	}
 
 	method ganar() {
-		if (metas.todasLasCajasEnSuLugar()) {
+		if (self.todasLasCajasEnSuLugar()) {
 			game.schedule(200, {=> sonido.reproducir("nivel_ganar")})
-			game.schedule(config.tiempo(), {=> self.avanzarA(self.siguienteNivel())})
+			game.schedule(config.tiempo(), {=> self.avanzarA(siguienteNivel)})
 		}
 	}
 
 	method avanzarA(unNivel) {
-		todosLosElementos.eliminar(cajas)
-		todosLosElementos.eliminar(metas)
-		todosLosElementos.eliminar(paredes)
+		self.eliminarElementos()
+		game.removeVisual(rata)
 		siguienteNivel.ejecutar()
 	}
 
 	method reiniciar() {
 		sonido.reproducir("nivel_reinicio")
-		cajas.reiniciarPosicion()
+		self.reiniciarPosicion()
 		pepe.reiniciarPosicion()
 		config.sumarReintento()
 		if (pepe.estaDesesperado()) {
-			game.say(cartel, "psss con la J ves una pista")
+			game.say(rata, "Pssst con la J ves una pista")
 			config.reintentos(0)
 		}
 	}
@@ -47,6 +50,55 @@ class Nivel {
 	method mostrarSolucion() {
 		game.addVisual(self.pista())
 		game.schedule(3000, { game.removeVisual(self.pista())})
+	}
+
+// ****CREACION DE ELEMENTOS*****
+	// Este metodo crea cada objeto PARED con su respectiva posicion para luego
+	// poder usar ADDVISUAL y generar las paredes automaticamente con el alto y ancho dado en config.
+	method crearBordes(ancho, alto, origenX, origenY) {
+		// columnas
+		alto.times({ i => listaParedes.add(new Pared(position = game.at(origenX, i + origenY - 1)))})
+		alto.times({ i => listaParedes.add(new Pared(position = game.at(ancho + origenX - 1, i + origenY - 1)))})
+			// filas
+		(ancho - 2).times({ i => listaParedes.add(new Pared(position = game.at(i + origenX, origenY)))})
+		(ancho - 2).times({ i => listaParedes.add(new Pared(position = game.at(i + origenX, alto + origenY - 1)))})
+	}
+
+	method crearPared(x, y) {
+		listaParedes.add(new Pared(position = game.at(x, y)))
+	}
+
+//METAS
+	method crearMeta(x, y) {
+		listaMetas.add(new Meta(position = game.at(x, y)))
+	}
+
+	method todasLasCajasEnSuLugar() {
+		return listaMetas.all{ unaMeta => unaMeta.cajaEnMeta() }
+	}
+
+//CAJAS
+	method crearCaja(x, y) {
+		listaCajas.add(new Caja(position = game.at(x, y), posicionInicial = game.at(x, y)))
+	}
+
+	method reiniciarPosicion() {
+		listaCajas.forEach({ unaCaja => unaCaja.reiniciarPosicion()})
+	}
+
+//ELEMENTOS DEL NIVEL (usado por pepe para interactuar)
+	method elementosDelNivel() = [ listaParedes, listaCajas, listaMetas ].flatten()
+
+//CARGA Y ELIMINACION DE ELEMENTOS POR NIVEL
+	method cargarElementos() {
+		self.elementosDelNivel().forEach{ unElemento => game.addVisual(unElemento)}
+	}
+
+	method eliminarElementos() {
+		self.elementosDelNivel().forEach{ unElemento => game.removeVisual(unElemento)}
+		listaParedes.clear()
+		listaMetas.clear()
+		listaCajas.clear()
 	}
 
 }
@@ -63,12 +115,11 @@ object menu inherits Nivel(siguienteNivel = tutorial) {
 		musica.volume(config.volumen())
 		game.schedule(1, {=> musica.play()})
 		musica.shouldLoop(true)
-		game.addVisual(cartel)
 		game.addVisual(self)
 	}
 
 	method empezarJuego() {
-		if (pepe.nivelActual() == self) {
+		if (config.nivelActual() == self) {
 			game.removeVisual(self)
 			siguienteNivel.ejecutar()
 			musica.stop()
@@ -85,14 +136,12 @@ object menu inherits Nivel(siguienteNivel = tutorial) {
 
 object tutorial inherits Nivel(siguienteNivel = nivel1, pista = tutorial_pista) {
 
-	override method cargarObjetos() {
+	override method cargarTodo() {
 		instrucciones.mostrar()
-		paredes.crearBordes(9, 3, 1, 1)
-		cajas.crear(5, 2)
-		metas.crear(8, 2)
-		todosLosElementos.cargar(cajas)
-		todosLosElementos.cargar(metas)
-		todosLosElementos.cargar(paredes)
+		self.crearBordes(9, 3, 1, 1)
+		self.crearCaja(5, 2)
+		self.crearMeta(8, 2)
+		self.cargarElementos()
 		game.addVisual(pepe)
 		pepe.iniciarEn(2, 2)
 	}
@@ -106,108 +155,100 @@ object tutorial inherits Nivel(siguienteNivel = nivel1, pista = tutorial_pista) 
 
 object nivel1 inherits Nivel(siguienteNivel = nivel2, pista = nivel1_pista) {
 
-	override method cargarObjetos() {
-		paredes.crearBordes(7, 5, 2, 2)
-		paredes.crear(3, 4)
-		paredes.crear(7, 4)
-		cajas.crear(4, 4)
-		cajas.crear(5, 4)
-		cajas.crear(6, 4)
-		cajas.crear(5, 5)
-		metas.crear(3, 3)
-		metas.crear(3, 5)
-		metas.crear(7, 3)
-		metas.crear(7, 5)
+	override method cargarTodo() {
+		self.crearBordes(7, 5, 2, 2)
+		self.crearPared(3, 4)
+		self.crearPared(7, 4)
+		self.crearCaja(4, 4)
+		self.crearCaja(5, 4)
+		self.crearCaja(6, 4)
+		self.crearCaja(5, 5)
+		self.crearMeta(3, 3)
+		self.crearMeta(3, 5)
+		self.crearMeta(7, 3)
+		self.crearMeta(7, 5)
 		pepe.iniciarEn(4, 5)
-		todosLosElementos.cargar(cajas)
-		todosLosElementos.cargar(metas)
-		todosLosElementos.cargar(paredes)
+		self.cargarElementos()
 	}
 
 }
 
 object nivel2 inherits Nivel(siguienteNivel = nivel3, pista = nivel2_pista) {
 
-	override method cargarObjetos() {
-		paredes.crearBordes(7, 7, 2, 1)
-		paredes.crear(5, 2)
-		paredes.crear(5, 5)
-		cajas.crear(6, 3)
-		cajas.crear(6, 4)
-		cajas.crear(4, 3)
-		cajas.crear(4, 4)
-		metas.crear(4, 2)
-		metas.crear(6, 2)
-		metas.crear(6, 5)
-		metas.crear(4, 5)
+	override method cargarTodo() {
+		self.crearBordes(7, 7, 2, 1)
+		self.crearPared(5, 2)
+		self.crearPared(5, 5)
+		self.crearCaja(6, 3)
+		self.crearCaja(6, 4)
+		self.crearCaja(4, 3)
+		self.crearCaja(4, 4)
+		self.crearMeta(4, 2)
+		self.crearMeta(6, 2)
+		self.crearMeta(6, 5)
+		self.crearMeta(4, 5)
 		pepe.iniciarEn(5, 6)
-		todosLosElementos.cargar(cajas)
-		todosLosElementos.cargar(metas)
-		todosLosElementos.cargar(paredes)
+		self.cargarElementos()
 	}
 
 }
 
 object nivel3 inherits Nivel(siguienteNivel = nivel4, pista = nivel3_pista) {
 
-	override method cargarObjetos() {
-		paredes.crearBordes(9, 7, 1, 1)
-		paredes.crear(4, 3)
-		paredes.crear(4, 4)
-		paredes.crear(3, 4)
-		paredes.crear(7, 4)
-		paredes.crear(6, 4)
-		paredes.crear(6, 5)
-		cajas.crear(4, 2)
-		cajas.crear(7, 2)
-		cajas.crear(7, 3)
-		cajas.crear(3, 5)
-		cajas.crear(3, 6)
-		cajas.crear(6, 6)
-		metas.crear(2, 2)
-		metas.crear(3, 2)
-		metas.crear(2, 3)
-		metas.crear(8, 6)
-		metas.crear(7, 6)
-		metas.crear(8, 5)
+	override method cargarTodo() {
+		self.crearBordes(9, 7, 1, 1)
+		self.crearPared(4, 3)
+		self.crearPared(4, 4)
+		self.crearPared(3, 4)
+		self.crearPared(7, 4)
+		self.crearPared(6, 4)
+		self.crearPared(6, 5)
+		self.crearCaja(4, 2)
+		self.crearCaja(7, 2)
+		self.crearCaja(7, 3)
+		self.crearCaja(3, 5)
+		self.crearCaja(3, 6)
+		self.crearCaja(6, 6)
+		self.crearMeta(2, 2)
+		self.crearMeta(3, 2)
+		self.crearMeta(2, 3)
+		self.crearMeta(8, 6)
+		self.crearMeta(7, 6)
+		self.crearMeta(8, 5)
 		pepe.iniciarEn(5, 3)
-		todosLosElementos.cargar(cajas)
-		todosLosElementos.cargar(metas)
-		todosLosElementos.cargar(paredes)
+		self.cargarElementos()
 	}
 
 }
 
 object nivel4 inherits Nivel(siguienteNivel = fin, pista = nivel4_pista) {
 
-	override method cargarObjetos() {
-		paredes.crearBordes(7, 8, 2, 0)
-		paredes.crear(5, 1)
-		paredes.crear(5, 5)
-		cajas.crear(4, 2)
-		cajas.crear(4, 4)
-		cajas.crear(5, 2)
-		cajas.crear(5, 3)
-		cajas.crear(5, 4)
-		cajas.crear(5, 6)
-		cajas.crear(6, 2)
-		cajas.crear(6, 4)
-		metas.crear(3, 5)
-		metas.crear(3, 6)
-		metas.crear(4, 5)
-		metas.crear(4, 6)
-		metas.crear(6, 5)
-		metas.crear(6, 6)
-		metas.crear(7, 5)
-		metas.crear(7, 6)
+	override method cargarTodo() {
+		self.crearBordes(7, 8, 2, 0)
+		self.crearPared(5, 1)
+		self.crearPared(5, 5)
+		self.crearCaja(4, 2)
+		self.crearCaja(4, 4)
+		self.crearCaja(5, 2)
+		self.crearCaja(5, 3)
+		self.crearCaja(5, 4)
+		self.crearCaja(5, 6)
+		self.crearCaja(6, 2)
+		self.crearCaja(6, 4)
+		self.crearMeta(3, 5)
+		self.crearMeta(3, 6)
+		self.crearMeta(4, 5)
+		self.crearMeta(4, 6)
+		self.crearMeta(6, 5)
+		self.crearMeta(6, 6)
+		self.crearMeta(7, 5)
+		self.crearMeta(7, 6)
 		pepe.iniciarEn(6, 1)
-		todosLosElementos.cargar(cajas)
-		todosLosElementos.cargar(metas)
-		todosLosElementos.cargar(paredes)
+		self.cargarElementos()
 	}
 
 	override method ganar() {
-		if (metas.todasLasCajasEnSuLugar()) {
+		if (self.todasLasCajasEnSuLugar()) {
 			game.schedule(config.tiempo(), {=> self.avanzarA(self.siguienteNivel())})
 		}
 	}
@@ -223,9 +264,9 @@ object fin inherits Nivel(siguienteNivel = null, pista = null) {
 	method position() = position
 
 	override method ejecutar() {
-		game.schedule(200, {=> game.addVisual(self)})
+		game.addVisual(self)
 		sonido.reproducir("final_sonido")
-		game.schedule(3200, { game.stop()})
+		game.schedule(3100, { game.stop()})
 	}
 
 }
