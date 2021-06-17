@@ -3,14 +3,7 @@ import config.*
 import extras.*
 import pepe.*
 
-//const pared = "pared_bloque.png"
-
-//const caja = "caja_bloque.png"
-
-//const meta = "meta_bloque.png"
-
 class Pared {
-	
 
 	var property position
 
@@ -73,8 +66,6 @@ object colisionables {
 }
 
 object vacio {
-
-	method image() = meta
 
 	method accion(unaDireccion) {
 		game.say(rata, "No tenés una caja adelante!")
