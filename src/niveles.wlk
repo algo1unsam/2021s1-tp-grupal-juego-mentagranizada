@@ -12,7 +12,8 @@ class Nivel {
 	const property listaCajas = []
 	const property listaMetas = []
 	const property listaParedes = []
-
+	
+	//Guarda el nivel actual en config, guarda su siguiente nivel y carga los objetos
 	method ejecutar() {
 		config.nivelActual(self)
 		self.siguienteNivel(siguienteNivel)
@@ -20,41 +21,43 @@ class Nivel {
 		rata.mostrar()
 	}
 
+	//Carga los elementos del nivel
 	method cargarTodo() {
 	}
-
+	
+	//Pregunta si todas las cajas estan en las metas y si es asi avanza al siguiente nivel
 	method ganar() {
 		if (self.todasLasCajasEnSuLugar()) {
 			game.schedule(200, {=> sonido.reproducir("nivel_ganar")})
 			game.schedule(config.tiempo(), {=> self.avanzarA(siguienteNivel)})
 		}
 	}
-
+	//Elimina los objetos del nivel actual y ejecuta el siguiente
 	method avanzarA(unNivel) {
 		self.eliminarElementos()
 		rata.ocultar()
 		siguienteNivel.ejecutar()
 	}
-
-	method reiniciar() {
+	//Reinicia la posicion de Pepe y las cajas, y si esta desesperado la rata lo ayuda
+	method reiniciarNivel() {
 		sonido.reproducir("nivel_reinicio")
 		self.reiniciarPosicion()
 		pepe.reiniciarPosicion()
-		config.sumarReintento()
+		pepe.sumarReintento()
 		if (pepe.estaDesesperado()) {
 			game.say(rata, "Pssst con la J ves una pista")
-			config.reintentos(0)
+			pepe.reintentos(0)
 		}
 	}
-
+	//Muestra la pista del nivel actual al presionar J
 	method mostrarSolucion() {
 		game.addVisual(self.pista())
 		game.schedule(3000, { game.removeVisual(self.pista())})
 	}
 
 // ****CREACION DE ELEMENTOS*****
-	// Este metodo crea cada objeto PARED con su respectiva posicion para luego
-	// poder usar ADDVISUAL y generar las paredes automaticamente con el alto y ancho dado en config.
+	// Este metodo crea cada objeto PARED con su respectiva posicion para luego poder 
+	//usar ADDVISUAL y generar las paredes automaticamente con el alto y ancho dado en config.
 	method crearBordes(ancho, alto, origenX, origenY) {
 		// columnas
 		alto.times({ i => listaParedes.add(new Pared(position = game.at(origenX, i + origenY - 1)))})
@@ -63,37 +66,40 @@ class Nivel {
 		(ancho - 2).times({ i => listaParedes.add(new Pared(position = game.at(i + origenX, origenY)))})
 		(ancho - 2).times({ i => listaParedes.add(new Pared(position = game.at(i + origenX, alto + origenY - 1)))})
 	}
-
+	//Crea una pared y la agrega a la lista
 	method crearPared(x, y) {
 		listaParedes.add(new Pared(position = game.at(x, y)))
 	}
 
 //METAS
+	//Crea una meta y la agrega a la lista
 	method crearMeta(x, y) {
 		listaMetas.add(new Meta(position = game.at(x, y)))
 	}
-
+	//Pregunta si en cada meta hay una caja
 	method todasLasCajasEnSuLugar() {
 		return listaMetas.all{ unaMeta => unaMeta.cajaEnMeta() }
 	}
 
 //CAJAS
+	//Crea una caja y la agrega a la lista
 	method crearCaja(x, y) {
 		listaCajas.add(new Caja(position = game.at(x, y), posicionInicial = game.at(x, y)))
 	}
-
+	//Reinicia la posicion de las cajas, viene del metodo reiniciarNivel
 	method reiniciarPosicion() {
 		listaCajas.forEach({ unaCaja => unaCaja.reiniciarPosicion()})
 	}
 
-//ELEMENTOS DEL NIVEL (usado por pepe para interactuar)
+//ELEMENTOS DEL NIVEL (lista usada por pepe para interactuar, y para la carga y eliminacion en cada nivel)
 	method elementosDelNivel() = [ listaParedes, listaCajas, listaMetas ].flatten()
 
 //CARGA Y ELIMINACION DE ELEMENTOS POR NIVEL
+	//Carga el visual de todos los elementos del nivel
 	method cargarElementos() {
 		self.elementosDelNivel().forEach{ unElemento => game.addVisual(unElemento)}
 	}
-
+	//Elimina el visual y limpia la lista de todos los elementos del nivel
 	method eliminarElementos() {
 		self.elementosDelNivel().forEach{ unElemento => game.removeVisual(unElemento)}
 		listaParedes.clear()
@@ -126,7 +132,7 @@ object menu inherits Nivel(siguienteNivel = tutorial) {
 		}
 	}
 
-	override method reiniciar() {
+	override method reiniciarNivel() {
 	}
 
 	override method mostrarSolucion() {
@@ -267,6 +273,10 @@ object fin inherits Nivel(siguienteNivel = null, pista = null) {
 		game.addVisual(self)
 		sonido.reproducir("final_sonido")
 		game.schedule(3100, { game.stop()})
+	}
+	
+	override method reiniciarNivel() {
+		
 	}
 
 }

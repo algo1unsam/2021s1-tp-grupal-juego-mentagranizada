@@ -5,12 +5,11 @@ import niveles.*
 import extras.*
 
 object config {
-
+	//Configuracion de volumen y teclas, además tiene el metodo revisarColision y guarda el nivel actual en el que esta el juego
 	const property volumen = 0.6
 	const tiempo = 900
 	const property alto = 9
 	const property ancho = 11
-	var property reintentos = 0
 	var property nivelActual = menu
 
 	method configurarTeclas() {
@@ -19,7 +18,7 @@ object config {
 		keyboard.up().onPressDo{ pepe.guardarDireccion(up)}
 		keyboard.down().onPressDo{ pepe.guardarDireccion(down)}
 		keyboard.space().onPressDo{ pepe.interactuar()}
-		keyboard.r().onPressDo{ nivelActual.reiniciar()}
+		keyboard.r().onPressDo{ nivelActual.reiniciarNivel()}
 		keyboard.enter().onPressDo{ nivelActual.empezarJuego()}
 		keyboard.j().onPressDo{ nivelActual.mostrarSolucion()}
 	}
@@ -32,16 +31,14 @@ object config {
 		nivelActual = unNivel
 	}
 
-	method sumarReintento() {
-		reintentos += 1
-	}
-
 	method tiempo() {
 		return tiempo
 	}
 
 }
 
+
+//DIRECCIONES, retornan la posicion siguiente para un objeto
 object up {
 
 	method posicionSiguiente(unObjeto) {
