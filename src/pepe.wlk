@@ -5,7 +5,6 @@ import config.*
 import extras.*
 
 object pepe {
-
 	var property position = game.origin()
 	var posicionInicial
 	var property ultimoInput = down
