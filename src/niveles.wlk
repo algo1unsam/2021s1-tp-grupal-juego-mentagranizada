@@ -17,7 +17,7 @@ class Nivel {
 		config.nivelActual(self)
 		self.siguienteNivel(siguienteNivel)
 		self.cargarTodo()
-		game.addVisual(rata)
+		rata.mostrar()
 	}
 
 	method cargarTodo() {
@@ -32,7 +32,7 @@ class Nivel {
 
 	method avanzarA(unNivel) {
 		self.eliminarElementos()
-		game.removeVisual(rata)
+		rata.ocultar()
 		siguienteNivel.ejecutar()
 	}
 

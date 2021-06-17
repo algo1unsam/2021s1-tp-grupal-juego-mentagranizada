@@ -26,6 +26,14 @@ object rata {
 	method position() = game.origin()
 
 	method image() = imagen
+	
+	method mostrar() {
+		game.addVisual(self)
+	}
+
+	method ocultar() {
+		game.removeVisual(self)
+	}
 
 }
 
