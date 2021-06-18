@@ -23,9 +23,7 @@ object config {
 		keyboard.j().onPressDo{ nivelActual.mostrarSolucion()}
 	}
 
-//	method revisarColision(unObjeto, unaDireccion) {
-//		return colisionables.lista().any{ unColisionable => unColisionable.position() == unaDireccion }
-//	}
+//Retorna true si el objeto colisiona con otro en la direccion indicada por parametro
 	method colisiona(unObjeto, unaDireccion) {
 		return colisionables.lista().any{ unColisionable => unColisionable.position() == unaDireccion.posicionSiguiente(unObjeto) }
 	}

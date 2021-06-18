@@ -70,13 +70,3 @@ object colisionables {
 	}
 
 }
-
-object vacio {
-	var property position = game.at(0,0)
-	
-	method accion(unaDireccion) {
-		game.say(rata, "No tenés una caja adelante!")
-	}
-
-}
-

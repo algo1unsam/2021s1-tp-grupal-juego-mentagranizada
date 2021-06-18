@@ -39,20 +39,20 @@ test "Si Pepe mira hacia arriba, no puede moverse porque hay una pared" {
 	assert.equals(game.at(2, 2), pepe.position())	
 }
 
-test "Si Pepe interactua con la caja, esta se mueve una posición" {
+test "Si Pepe interactua con la caja1, esta se mueve una posición" {
 	pepe.guardarDireccion(right)
 	pepe.guardarDireccion(right)
 	pepe.puedeMoverse(right)
 	assert.equals(game.at(4, 2), pepe.position())
 	pepe.puedeMoverse(right)
 	assert.equals(game.at(4, 2), pepe.position())	
-	assert.equals(game.at(5, 2), pepe.loQueTieneAdelante().position())	
+	assert.equals(game.at(5, 2), caja1.position())	
 	assert.throwsException({pepe.interactuar()})
 	assert.equals(game.at(6, 2), caja1.position())	
 	
 }
 
-test "Si la caja llega a la meta, todas las cajas estan en su lugar, y pasa al siguiente nivel" {
+test "Si la caja1 llega a la meta, todas las cajas estan en su lugar, y pasa al siguiente nivel" {
 	caja1.position(game.at(6,2))
 	assert.that(tutorial.todasLasCajasEnSuLugar())
 	tutorial.avanzarA(tutorial.siguienteNivel())
