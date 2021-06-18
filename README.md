@@ -4,11 +4,11 @@
 
 ## Descripción del juego
 
-Pepe consiguió un nuevo trabajo en el supermercado TOCO, y en su primer día debe ordenar la mercadería del depósito. Ayudá a Pepe a acomodar las cajas y ponerlas en el lugar que les corresponde para completar todas sus tareas.
+Pepe consiguió un nuevo trabajo en el supermercado TOCO, y en su primer día debe ordenar la mercadería del depósito. Ayudá a Pepe a acomodar las cajas y ponerlas en el lugar que les corresponde para completar todas sus tareas. Basado en el juego Sokoban.
 
 ### Objetivo
 
-Resolver los 4 niveles de puzzles moviendo todas las cajas a los lugares indicados. Recordá que las cajas son muy pesadas y Pepe no puede mover más de una a la vez.
+Resolver los cuatro niveles de puzzles moviendo todas las cajas a los lugares indicados. Recordá que las cajas son muy pesadas y Pepe no puede mover más de una a la vez.
 
 ### Teclas y controles
 
@@ -57,3 +57,6 @@ De verdad querés la respuesta de esto?
 ![solucion-4](https://user-images.githubusercontent.com/49133201/122067972-6403f180-cdca-11eb-97fc-19d19530f2dc.gif)
   
 </details>
+
+![rata_gracias](https://user-images.githubusercontent.com/49133201/122488228-64131580-cfb3-11eb-8661-632db609773d.png)
+
