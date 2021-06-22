@@ -11,7 +11,7 @@ object pepe {
 	var property ultimoInput = down
 	var property reintentos = 0
 
-	method image() = ultimoInput.toString() + ".png"
+	method image() = "pepe_" + ultimoInput.toString() + ".png"
 
 //Guarda el ultimo input para el movimiento del sprite y pregunta si puede avanzar en esa direccion
 	method guardarDireccion(unaDireccion) {
