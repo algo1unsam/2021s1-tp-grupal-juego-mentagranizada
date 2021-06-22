@@ -6,7 +6,7 @@ import extras.*
 
 object config {
 	//Configuracion de volumen y teclas, además tiene el metodo revisarColision y guarda el nivel actual en el que esta el juego
-	const property volumen = 0.6
+	const property volumen = 0.4
 	const tiempo = 900
 	const property alto = 9
 	const property ancho = 11
