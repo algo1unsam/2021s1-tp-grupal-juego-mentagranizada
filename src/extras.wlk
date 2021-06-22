@@ -21,7 +21,7 @@ object instrucciones {
 
 object rata {
 	
-	const imagen = "Ratita.png"
+	const imagen = "ratita.png"
 
 	method position() = game.origin()
 
